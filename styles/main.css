@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.fc {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+}
+
+.fr {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.gap {
+    gap: 100px;
+}
+
+.primary-nav {
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.nav-list li {
+    display: inline;
+}
+
+.primary-nav .nav-list li a {
+    text-decoration: none;
+    padding: 10px;
+    color: black;
+    transition: 0.2s ease;
+}
+
+.primary-nav .nav-list li a:hover {
+    color: rgb(228, 120, 20);
+}
+
+.nav-line {
+    width: 100%;
+    background-color: rgb(228, 120, 20);
+    height: 2px;
+    margin-bottom: 100px;
+}
+
+.bottom-nav .nav-list a {
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+    transition: 0.7s ease;
+}
+
+.account-button {
+    border: 0.75px solid rgb(233, 233, 233);
+    background-color: rgb(233, 233, 233);
+    border-radius: 20px;
+}
+
+.account-button:hover {
+    border: 0.75px solid rgb(129, 129, 129);
+}
+
+#nav-button {
+    display: none;
+    padding: 15px;
+    background-color: white;
+    border: 2px solid rgb(129, 129, 129);
+}
+
+@media only screen and (max-width: 700px) {
+    #nav-button {
+        display: block;
+    }
+    .primary-nav .nav-list {
+        display: none;
+    }
+}
+
+#mobile-menu {
+    display: none;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    padding: 25px 0px 25px 0px;
+    background-color: rgb(233, 233, 233);
+}
+
+#mobile-menu a {
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    color: black;
+    padding: 15px;
+}
+
+#mobile-menu a:active {
+    background-color:rgb(129, 129, 129);
+}
+
+#close-button {
+    position: absolute;
+    padding: 5px 12px 5px 12px;
+    font-size: 24px;
+    top: 10px;
+    right: 10px;
+}
+
+footer {
+    color: white;
+    background-color: black;
+    padding: 45px;
+}

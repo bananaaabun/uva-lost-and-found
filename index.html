@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+ <html lang="en">
+     <head>
+         <meta charset="utf-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+         <meta name="author" content="CS4640">
+         <meta name="description" content="Lost and Found Portal">
+         <meta name="keywords" content="UVA lost found Charlottesville"> 
+         
+         <title>UVA Lost and Found</title>
+         <link rel="stylesheet" type="text/css" href="styles/main.css" >
+    </head>  
+    <body>
+        <nav class="fr primary-nav">
+            <div class="fr">
+                <img src="images/logo.png" alt="logo" >
+                <h2>Lost & Found</h2>
+            </div>
+            <ul class="nav-list">
+                <li><a href="">Make a Request</a></li>
+                <li><a href="">Lost Items</a></li>
+                <li>
+                    <a href="" class="account-button">
+                        <img src="images/profile.jpg" alt="profilePic"> Log in
+                    </a>
+                </li>
+            </ul>
+            <button onclick="openMenu()" id="nav-button">Menu</button>
+        </nav>
+        <div id="mobile-menu" class="fc">
+            <button onclick="closeMenu()" id="close-button">&times;</button>
+            <a href="" class="ap">Make a Request</a>
+            <a href="" class="ap">Lost Items</a>
+            <a href="" class="ap">Account</a>
+        </div>
+        <script>
+            let menu = document.getElementById("mobile-menu");
+            function openMenu() {
+                menu.style.display = "flex";
+            }
+            function closeMenu() {
+                menu.style.display = "none";
+            }
+        </script>
+        <div class="nav-line"></div>
+
+        <main class="fc gap">
+            <h4>Content</h4>
+            <h5>With gap</h5>
+        </main>
+
+        <footer class="fc">
+            <h1 style="margin-bottom: 45px;">Lost & Found</h1>
+            <nav class="bottom-nav">
+                <ul class="nav-list">
+                    <li><a href="" class="ap">Found Something</a></li>
+                    <li><a href="" class="ap">Lost Something</a></li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
+ </html>
