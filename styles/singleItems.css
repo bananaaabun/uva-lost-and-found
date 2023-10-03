@@ -1,0 +1,143 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    flex-direction: row;
+}
+
+nav a {
+    margin: 0 10px;
+}
+
+.custom-navbar {
+    background-color: transparent;
+	position: relative;
+}
+
+.orange-line {
+    border: 0;
+    height: 3px; 
+    background-color: #ffa500;
+}
+
+
+.itemContainer {
+    margin: 30px;
+    padding-right: 30px;
+	flex-grow: 2;
+}
+
+.sectionContainer{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.rightSideContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.imgContainer {
+	width: 550px;
+    display: flex;
+    justify-content: flex-end; 
+    margin: 30px;
+	padding-left: 20px;
+    img {
+        max-width: 100%;
+    }
+}
+
+hr{
+	background-color:black;
+	size: 4cm;
+}
+
+.chatContainerWrapper{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.chatContainer {
+    width: 100%;
+    max-width: 500px;
+	padding-left: 20px;
+}
+
+.chatHeader {
+    background-color: #ffa500 !important;
+    font-weight: bold;
+}
+
+.chatFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #ffa500 !important;
+    border-color: #ffa500 !important;
+    margin-left: 10px; 
+}
