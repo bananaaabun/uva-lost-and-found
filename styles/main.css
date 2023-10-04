@@ -44,8 +44,9 @@ section {
 }
 
 .img-large {
-    width: 600px;
-    padding: 50px;
+    width: 300px;
+    border-radius: 20px;
+   margin: 50px;
 }
 
 .half {
