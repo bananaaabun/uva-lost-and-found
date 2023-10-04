@@ -14,10 +14,13 @@ main {
     flex: 1;
 }
 
+section {
+    padding: 15px;
+}
+
 .fc {
     display: flex;
     flex-direction: column;
-    place-items: center;
 }
 
 .fr {
@@ -27,13 +30,32 @@ main {
     flex-wrap: wrap;
 }
 
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
 .gap {
     gap: 100px;
 }
 
+.gap-small {
+    gap: 25px;
+}
+
+.img-large {
+    width: 600px;
+    padding: 50px;
+}
+
+.half {
+    width: 50%;
+    text-align: left;
+}
+
 .primary-nav {
     justify-content: space-between;
-    padding: 10px;
+    padding: 12px;
 }
 
 .nav-list li {
@@ -69,6 +91,13 @@ main {
     border: 0.75px solid rgb(233, 233, 233);
     background-color: rgb(233, 233, 233);
     border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 80px;
+    margin-left: 17px;
+    height: 15px;
 }
 
 .account-button:hover {
@@ -120,8 +149,38 @@ main {
     right: 10px;
 }
 
+#about button {
+    width: 200px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid rgb(231, 115, 6);
+    border-radius: 0px 10px 0px 10px;
+    transition: 0.7s ease;
+}
+
+#about .button-one {
+    background-color: rgb(231, 115, 6);
+    color: white;
+}
+
+#about .button-two {
+    color: rgb(231, 115, 6);
+    background-color: white;
+}
+
+#about .button-one:hover {
+    color: rgb(231, 115, 6);
+    background-color: white;
+}
+
+#about .button-two:hover {
+    background-color: rgb(231, 115, 6);
+    color: white;
+}
+
 footer {
     color: white;
     background-color: black;
     padding: 45px;
+    margin-top: 100px;
 }
