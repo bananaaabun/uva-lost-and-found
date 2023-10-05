@@ -78,7 +78,7 @@ section {
 
 #about .button-one:hover {
     color: rgb(231, 115, 6);
-    background-color: white;
+    background-color: white !important;
 }
 
 #about .button-two:hover {
