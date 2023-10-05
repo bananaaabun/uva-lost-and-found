@@ -90,6 +90,11 @@ a:hover {
 }
 
 #about .button-one:hover {
+    background-color: white;
+    color: rgb(231, 115, 6);
+}
+
+#login-form .button-one:hover {
     background-color: white !important;
     color: rgb(231, 115, 6);
 }
