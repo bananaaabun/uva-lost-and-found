@@ -122,9 +122,9 @@ footer {
 
 .lost-item {
     background-color: rgba(255, 165, 0, 0.5); 
-    margin-bottom: 20px;  /* Some spacing between items */
+    margin-bottom: 20px;  
     padding: 10px;
-    margin: 20px;  /* Some inner spacing for content */
+    margin: 20px; 
     border-radius: 15px;  
     height: 300px;
     width: 300px;
@@ -133,7 +133,6 @@ footer {
     gap: 20px;
 }
 
-/* To make the content more readable against the orange background */
 .lost-item * {
     color: #333;
 }
@@ -214,7 +213,7 @@ hr{
 }
 
 .chatHeader {
-    background-color: #BF6900 !important;
+    background-color: rgb(231, 115, 6) !important;
     font-weight: bold;
 }
 
@@ -225,9 +224,43 @@ hr{
     font-weight: bold;
 }
 
-.btn-primary {
-    background-color: #BF6900!important;
-    border-color: #BF6900 !important;
-    margin-left: 10px; 
+.button-primary {
+    background-color: rgb(231, 115, 6);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.submission-form {
+    padding: 30px;
+    border-radius: 10px;
+    color: black;
+    border: 1px solid #333;
+    border-color: #3333334f;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
