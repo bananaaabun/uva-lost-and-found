@@ -77,25 +77,30 @@
     left: 0px;
     right: 0px;
     padding: 25px 0px 25px 0px;
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(0, 0, 0);
+    color: white;
 }
 
 #mobile-menu a {
     text-decoration: none;
     text-align: center;
     width: 100%;
-    color: black;
+    color: white;
     padding: 15px;
 }
 
 #mobile-menu a:active {
-    background-color:rgb(129, 129, 129);
+    background-color:rgb(255, 255, 255);
+    color: black;
 }
 
 #close-button {
     position: absolute;
-    padding: 5px 12px 5px 12px;
+    padding: 5px 15px 5px 15px;
     font-size: 24px;
-    top: 10px;
-    right: 10px;
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+    top: 15px;
+    right: 15px;
 }
