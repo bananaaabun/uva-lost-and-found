@@ -21,6 +21,14 @@ section {
     padding: 15px;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 .fc {
     display: flex;
     flex-direction: column;
@@ -52,18 +60,23 @@ section {
     margin: 70px;
 }
 
-.half {
-    width: 50%;
-    text-align: left;
+#login button {
+    width: 200px;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid rgb(231, 115, 6);
+    border-radius: 0px 10px 0px 10px;
+    margin-top: 15px;
 }
 
-#about button {
+#about a {
     width: 200px;
     font-size: 16px;
     padding: 10px;
     border: 1px solid rgb(231, 115, 6);
     border-radius: 0px 10px 0px 10px;
     transition: 0.7s ease;
+    text-align: center;
 }
 
 #about .button-one {
@@ -72,13 +85,13 @@ section {
 }
 
 #about .button-two {
-    color: rgb(231, 115, 6);
     background-color: white;
+    color: rgb(231, 115, 6);
 }
 
 #about .button-one:hover {
-    color: rgb(231, 115, 6);
     background-color: white !important;
+    color: rgb(231, 115, 6);
 }
 
 #about .button-two:hover {
