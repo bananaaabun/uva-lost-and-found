@@ -49,35 +49,36 @@
         </script>
         <div class="nav-line"></div>
 
-<div class="container">
-    <div class="submission-form">
-        <h2>Found an Item?</h2>
-        <hr>
-        <form>
-            <div class="form-group">
-                <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" placeholder="e.g., Earring">
-            </div>
-            <div class="form-group">
-                <label for="itemDate">Date Found:</label>
-                <input type="date" id="itemDate">
-            </div>
-            <div class="form-group">
-                <label for="itemLocation">Location Found:</label>
-                <input type="text" id="itemLocation" placeholder="e.g., Newcomb Hall">
-            </div>
-            <div class="form-group">
-                <label for="itemDescription">Description:</label>
-                <textarea id="itemDescription" rows="3" placeholder="Provide a brief description of the item"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="itemImage">Upload Image:</label>
-                <input type="file" id="itemImage">
-            </div>
-            <button class="button-primary">Submit Found Item</button>
-        </form>
+    <div class="container">
+        <div class="submission-form">
+            <h2>Found an Item?</h2>
+            <hr>
+            <form method="POST" onsubmit="return showFormData(event)">
+                <div class="form-group">
+                    <label for="itemName">Item Name:</label>
+                    <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
+                </div>
+                <div class="form-group">
+                    <label for="itemDate">Date Found:</label>
+                    <input type="date" id="itemDate" name="itemDate">
+                </div>
+                <div class="form-group">
+                    <label for="itemLocation">Location Found:</label>
+                    <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Newcomb Hall">
+                </div>
+                <div class="form-group">    
+                    <label for="itemDescription">Description:</label>
+                    <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Provide a brief description of the item"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="itemImage">Upload Image:</label>
+                    <input type="file" id="itemImage" name="itemImage">
+                </div>
+                <button class="button-primary" type="submit">Submit Found Item</button>
+            </form>
+        </div>
     </div>
-</div>
+    
 
 <footer class="fc center">
     <h1 style="margin-bottom: 45px;">Lost & Found</h1>
@@ -90,3 +91,25 @@
 </footer>
 </body>
 </html>
+
+<script>
+    function showFormData(event) {
+        const itemName = document.getElementById('itemName').value;
+        const itemDate = document.getElementById('itemDate').value;
+        const itemLocation = document.getElementById('itemLocation').value;
+        const itemDescription = document.getElementById('itemDescription').value;
+
+        const message = 
+            "Item Name: " + itemName + "\n" +
+            "Date Found: " + itemDate + "\n" +
+            "Location Found: " + itemLocation + "\n" +
+            "Description: " + itemDescription;
+
+        alert(message);
+        
+        event.preventDefault(); // prevents page from reloading
+        event.target.reset(); // clears form fields
+        location.reload(); // reloads page
+    }
+
+</script>
