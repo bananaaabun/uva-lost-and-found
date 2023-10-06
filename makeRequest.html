@@ -9,7 +9,7 @@
          <meta charset="utf-8">
          <meta http-equiv="X-UA-Compatible" content="IE=edge">
          <meta name="viewport" content="width=device-width, initial-scale=1"> 
-         <meta name="author" content="CS4640">
+         <meta name="author" content="Barna Alimu and Nate Gleberman">
          <meta name="description" content="Lost and Found Portal">
          <meta name="keywords" content="UVA lost found Charlottesville"> 
          <title>UVA Lost and Found - Make a Request</title>
@@ -51,47 +51,47 @@
         <div class="nav-line"></div>
         <!-- End Nav Bar -->
 
-    <div class="container">
-        <div class="submission-form">
-            <h2>Found an Item?</h2>
-            <hr>
-            <form method="POST" onsubmit="return showFormData(event)">
-                <div class="form-group">
-                    <label for="itemName">Item Name:</label>
-                    <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
-                </div>
-                <div class="form-group">
-                    <label for="itemDate">Date Found:</label>
-                    <input type="date" id="itemDate" name="itemDate">
-                </div>
-                <div class="form-group">
-                    <label for="itemLocation">Location Found:</label>
-                    <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Newcomb Hall">
-                </div>
-                <div class="form-group">    
-                    <label for="itemDescription">Description:</label>
-                    <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Provide a brief description of the item"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="itemImage">Upload Image:</label>
-                    <input type="file" id="itemImage" name="itemImage">
-                </div>
-                <button class="button-primary" type="submit">Submit Found Item</button>
-            </form>
+        <div class="container">
+            <div class="submission-form">
+                <h2>Found an Item?</h2>
+                <hr>
+                <form method="POST" onsubmit="return showFormData(event)">
+                    <div class="form-group">
+                        <label for="itemName">Item Name:</label>
+                        <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDate">Date Found:</label>
+                        <input type="date" id="itemDate" name="itemDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemLocation">Location Found:</label>
+                        <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Newcomb Hall">
+                    </div>
+                    <div class="form-group">    
+                        <label for="itemDescription">Description:</label>
+                        <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Provide a brief description of the item"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemImage">Upload Image:</label>
+                        <input type="file" id="itemImage" name="itemImage">
+                    </div>
+                    <button class="button-primary" type="submit">Submit Found Item</button>
+                </form>
+            </div>
         </div>
-    </div>
     
- <!-- Footer -->
-<footer class="fc center">
-    <h1 style="margin-bottom: 45px;">Lost & Found</h1>
-    <nav class="bottom-nav">
-        <ul class="nav-list">
-            <li><a href="makeRequest.html" class="ap">Found Something</a></li>
-            <li><a href="lostItemsPage.html" class="ap">Lost Something</a></li>
-        </ul>
-    </nav>
-</footer>
-</body>
+        <!-- Footer -->
+        <footer class="fc center">
+            <h1 style="margin-bottom: 45px;">Lost & Found</h1>
+            <nav class="bottom-nav">
+                <ul class="nav-list">
+                    <li><a href="makeRequest.html" class="ap">Found Something</a></li>
+                    <li><a href="lostItemsPage.html" class="ap">Lost Something</a></li>
+                </ul>
+            </nav>
+        </footer>
+    </body>
 </html>
  <!-- form submission post data logic testing only-->
 <!-- <script>
