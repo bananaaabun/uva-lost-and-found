@@ -50,6 +50,7 @@
         </script>
         <div class="nav-line"></div>
          <!-- End of Nav Bar -->
+
          <!-- log in block -->
         <main class="fc center gap">
             <section id="login" class="fc center outline">
@@ -57,21 +58,22 @@
                 <hr>
                 <h2>Login or Create Account</h2>
                 <hr>
-                <form id="login-form">
+                <form id="login-form" method="post" action="login.php">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter username">
+                        <small id="emailHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                       <small id="emailHelp" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                     </div>
-                    <!-- <div class="form-group form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Keep me logged in</label>
-                    </div> -->
-                    <button type="submit" class="button-primary">Submit</button>
+                    <button type="submit" value="Submit" class="button-primary">Submit</button>
                 </form>
 
             </section>
