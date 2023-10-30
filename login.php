@@ -1,6 +1,6 @@
 <?php
 
-print_r($_POST);
+echo "Logging in...";
 
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -29,7 +29,7 @@ function login() {
                 // $_SESSION["email"] = $_POST["email"];
                 // $_SESSION["last_login"] = date_default_timezone_get();
                 // Send user to the appropriate page (question)
-                // header("Location: ?command=question");
+                header("Location: index.html");
                 return;
             } else {
                 // User was in the database, verify password
@@ -38,23 +38,21 @@ function login() {
                     // $_SESSION["username"] = $res[0]["username"];
                     // $_SESSION["email"] = $res[0]["email"];
                     // $_SESSION["last_login"] = $res[0]["last_login"];
-                    // header("Location: ?command=question");
+                    header("Location: index.html");
                     echo "Succesfully logged in. User existed.\n";
                     return;
                 } else {
                     // $this->errorMessage = "Incorrect password.";
-                    echo "Failed to login";
+                    header("Location: login.html");
                 }
             }
     } else {
         // $this->errorMessage = "Name, email, and password are required.";
-        echo "Failed to login-enter everything.";
+        header("Location: login.html");
     }
     // If something went wrong, show the welcome page again
     // $this->showWelcome();
 }
-
-echo "Starting\n";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     login();
