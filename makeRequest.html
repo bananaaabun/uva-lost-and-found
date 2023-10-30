@@ -55,7 +55,7 @@
             <div class="submission-form">
                 <h2>Found an Item?</h2>
                 <hr>
-                <form method="POST" onsubmit="return showFormData(event)">
+                <form method="POST" action="submit_item.php">
                     <div class="form-group">
                         <label for="itemName">Item Name:</label>
                         <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
@@ -93,25 +93,3 @@
         </footer>
     </body>
 </html>
- <!-- form submission post data logic testing only-->
-<!-- <script>
-    function showFormData(event) {
-        const itemName = document.getElementById('itemName').value;
-        const itemDate = document.getElementById('itemDate').value;
-        const itemLocation = document.getElementById('itemLocation').value;
-        const itemDescription = document.getElementById('itemDescription').value;
-
-        const message = 
-            "Item Name: " + itemName + "\n" +
-            "Date Found: " + itemDate + "\n" +
-            "Location Found: " + itemLocation + "\n" +
-            "Description: " + itemDescription;
-
-        alert(message);
-        
-        event.preventDefault(); // prevents page from reloading
-        event.target.reset(); // clears form fields
-        location.reload(); // reloads page
-    }
-
-</script> -->
