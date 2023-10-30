@@ -26,4 +26,11 @@ function validateUsername($username) {
     }
 }
 
+function validateEmailAndUsername($email, $username) {
+    if (validateEmail($email) && validateUsername($username)) {
+        return true;
+    }
+    return false;
+}
+
 ?>
