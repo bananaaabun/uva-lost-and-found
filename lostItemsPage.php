@@ -1,3 +1,5 @@
+<?php include("./lostItems.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +18,7 @@
     <meta name="description" content="Page detailing a lost item">
     <meta name="keywords" content="lost and found portal">
 </head>
+
 <body>
     <!-- Nav Bar -->
     <nav id="primary-nav" class="fr">
@@ -51,40 +54,45 @@
     </script>
     <div class="nav-line"></div>
     <!-- End Nav Bar -->
-     <!-- containers for lost items -->
-    <div class="container mt-5">
+    <!-- containers for lost items -->
+    <<div class="container mt-5">
         <div style="padding-left: 20px;">
             <div style="display: flex; align-items: center;">
                 <h1 style="margin-right: 50px;">Lost Items</h1>
-            <div class="searchBar" style="margin-left: 50px;">
-                <input type="text" class="form-control" placeholder="Search for items...">
-            </div>
+                <div class="searchBar" style="margin-left: 50px;">
+                    <input type="text" class="form-control" placeholder="Search for items...">
+                </div>
             </div>
         </div>
         <hr>
         <div class="lostItems d-flex flex-wrap justify-content-between">
-            <a href="singleItemPage.html" style="color: black;">
-                <div class="lost-item">Item 1 (image/details)</div>
-            </a>
-            <div class="lost-item">Item 2 (image/details)</div>
-            <div class="lost-item">Item 3 (image/details)</div>
-            <div class="lost-item">Item 4 (image/details)</div>
-            <div class="lost-item">Item 5 (image/details)</div>
-            <div class="lost-item">Item 6 (image/details)</div>
-            <div class="lost-item">Item 7 (image/details)</div>
-            <div class="lost-item">Item 8 (image/details)</div>
-            <div class="lost-item">Item 9 (image/details)</div>
+            <!-- Rendering the items fetched from the database -->
+            <?php if (!empty($items)): ?>
+                <?php foreach ($items as $item): ?>
+                    <a href="singleItemPage.php?item_id=<?php echo $item['item_id']; ?>" style="color: black;">
+                        <div class="lost-item">
+                            <img src="path_to_uploads/<?php echo $item['image']; ?>" alt="Item Image">
+                            <!-- Adjust path if needed -->
+                            <p>
+                                <?php echo $item['item_name']; ?>
+                            </p>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No lost items found.</p>
+            <?php endif; ?>
         </div>
-    </div>
-    
-    <!-- footer -->
-    <footer class="fc center">
-        <h1 style="margin-bottom: 45px;">Lost & Found</h1>
-        <nav class="bottom-nav">
-            <ul class="nav-list">
-                <li><a href="makeRequest.html">Found Something</a></li>
-                <li><a href="lostItemsPage.html">Lost Something</a></li>
-            </ul>
-        </nav>
-    </footer>
+        </div>
+
+        <!-- footer -->
+        <footer class="fc center">
+            <h1 style="margin-bottom: 45px;">Lost & Found</h1>
+            <nav class="bottom-nav">
+                <ul class="nav-list">
+                    <li><a href="makeRequest.html">Found Something</a></li>
+                    <li><a href="lostItemsPage.html">Lost Something</a></li>
+                </ul>
+            </nav>
+        </footer>
 </body>

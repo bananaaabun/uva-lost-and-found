@@ -12,11 +12,11 @@
          <meta name="author" content="Barna Alimu and Nate Gleberman">
          <meta name="description" content="Lost and Found Portal">
          <meta name="keywords" content="UVA lost found Charlottesville"> 
-         <title>UVA Lost and Found - Make a Request</title>
+         <title>UVA Lost and Found - Home</title>
          <link rel="stylesheet" type="text/css" href="styles/main.css" >
     </head>  
     <body>
-        <!-- Nav Bar -->
+         <!-- Nav Bar -->
         <nav id="primary-nav" class="fr">
             <a href="index.html" class="fr" style="color: black; text-decoration: none;">
                 <img src="assets/logo.png" class="logo" alt="logo">
@@ -26,8 +26,15 @@
                 <li><a href="makeRequest.html">Make a Request</a></li>
                 <li><a href="lostItemsPage.html">Lost Items</a></li>
                 <li>
-                    <a href="login.html" class="account-button center" style="padding: 20px;">
-                        <img src="assets/profile-circle.svg" alt="profilePic" style="margin-right: 15px;"> Log in
+                    <a href="?command=showlogin" class="account-button center" style="padding: 20px;">
+                        <?php 
+                            if(!empty($_SESSION["username"])) {
+                                echo $_SESSION["username"];
+                            }
+                            else {
+                                echo "<img src=\"assets/profile-circle.svg\" alt=\"profilePic\" style=\"margin-right: 15px;\"> Log in";
+                            }
+                        ?>
                     </a>
                 </li>
             </ul>
@@ -49,48 +56,31 @@
             }
         </script>
         <div class="nav-line"></div>
-        <!-- End Nav Bar -->
+    <!-- End of Nav Bar -->
+    <?=$message?>
 
-        <div class="container">
-            <div class="submission-form">
-                <h2>Found an Item?</h2>
-                <hr>
-                <form method="POST" action="index.php?command=submitItem" enctype="multipart/form-data">
-                    <!-- Hidden input to specify the command for the controller -->
-                    <div class="form-group">
-                        <label for="itemName">Item Name:</label>
-                        <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
-                    </div>
-                    <div class="form-group">
-                        <label for="itemDate">Date Found:</label>
-                        <input type="date" id="itemDate" name="itemDate">
-                    </div>
-                    <div class="form-group">
-                        <label for="itemLocation">Location Found:</label>
-                        <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Newcomb Hall">
-                    </div>
-                    <div class="form-group">    
-                        <label for="itemDescription">Description:</label>
-                        <textarea id="itemDescription" name="itemDescription" rows="3" placeholder="Provide a brief description of the item"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="itemImage">Upload Image:</label>
-                        <input type="file" id="itemImage" name="itemImage">
-                    </div>
-                    <button class="button-primary" type="submit">Submit Found Item</button>
-                </form>
-            </div>
-        </div>
-    
+     <!-- main content -->
+        <main class="fc center gap">
+            <section id="about" class="fr center">
+                <img class="img-large" src="assets/rotunda-orange.png" alt="rotunda">
+                <div class="img-large fc gap-small">
+                    <h2>About Lost & Found</h2>
+                    <p>The portal seeks to bridge the UVA community gaps by linking individuals who have misplaced items with those who've located them. Through a digital platform, members can swiftly report, search, and communicate regarding these items.</p>
+                    <a class="button-one" href="lostItemsPage.html">I've lost something!</a>
+                    <a class="button-two" href="makeRequest.html">I've found something!</a>
+                </div>
+            </section>
+        </main>
+         
         <!-- Footer -->
         <footer class="fc center">
             <h1 style="margin-bottom: 45px;">Lost & Found</h1>
             <nav class="bottom-nav">
                 <ul class="nav-list">
-                    <li><a href="makeRequest.html" class="ap">Found Something</a></li>
-                    <li><a href="lostItemsPage.html" class="ap">Lost Something</a></li>
+                    <li><a href="makeRequest.html">Found Something</a></li>
+                    <li><a href="lostItemsPage.html">Lost Something</a></li>
                 </ul>
             </nav>
         </footer>
     </body>
-</html>
+ </html>
