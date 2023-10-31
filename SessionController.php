@@ -52,6 +52,7 @@ class SessionController {
     public function login() {
 
         $_SESSION["message"] = "";
+        $_SESSION["condition"] = "";
 
         include("helper/regex-checks.php");
 
@@ -64,42 +65,56 @@ class SessionController {
                 $res =  $this->db->query("select * from users where email = $1;", $_POST["email"]);
                 if (empty($res)) {
                     // User was not there, so insert them
+                    $timestamp = date("Y-m-d H:i:s");
                      $this->db->query("insert into users (username, email, password, last_login) values ($1, $2, $3, $4);",
                         $_POST["username"], $_POST["email"],
-                        password_hash($_POST["password"], PASSWORD_DEFAULT), date("Y-m-d H:i:s"));
+                        password_hash($_POST["password"], PASSWORD_DEFAULT), $timestamp);
                     $_SESSION["username"] = $_POST["username"];
                     $_SESSION["email"] = $_POST["email"];
-                    $_SESSION["last_login"] = date("Y-m-d H:i:s");
+                    $_SESSION["last_login"] = $timestamp;
                     $_SESSION["message"] = "Welcome {$_SESSION["username"]}! This is your first time logging in!";
+                    $_SESSION["condition"] = "good";
                     // Send user to the appropriate page (home)
+                    session_write_close();
                     header("Location: index.php");
-                    return;
+                    exit;
                 } else {
                     // User was in the database, verify password
                     if (password_verify($_POST["password"], $res[0]["password"])) {
                         // Password was correct
+                        $timestamp = date("Y-m-d H:i:s");
                         $_SESSION["username"] = $res[0]["username"];
                         $_SESSION["email"] = $res[0]["email"];
                         $_SESSION["last_login"] = $res[0]["last_login"];
-                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last on {$$_SESSION["last_login"]}";
+                        // Update last login in the database after grabbing that variable
+                        $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
+                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
+                        $_SESSION["condition"] = "neutral";
+                        session_write_close();
                         header("Location: index.php");
-                        return;
+                        exit;
                     } else {
                         $_SESSION["message"] = "Incorrect password.";
+                        $_SESSION["condition"] = "bad";
+                        session_write_close();
                         header("Location: login.php");
-                        return;
+                        exit;
                     }
                 }
             }
         } else {
             $_SESSION["message"] = "Please fill out all fields!";
+            $_SESSION["condition"] = "bad";
+            session_write_close();
             header("Location: login.php");
-            return;
+            exit;
         }
         // If something went wrong, show the welcome page again
         $_SESSION["message"] = "Something went wrong. Please refresh the page and try again.";
+        $_SESSION["condition"] =  "bad";
+        session_write_close();
         header("Location: login.php");
-        return;
+        exit;
     }
 
     /**
