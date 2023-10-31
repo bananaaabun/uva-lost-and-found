@@ -11,6 +11,7 @@
 
 <?php
 
-// $_SESSION["message"] = ""; // RESET
+$_SESSION["message"] = ""; // RESET
+$_SESSION["condition"] = "neutral";
 
 ?>

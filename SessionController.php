@@ -52,6 +52,7 @@ class SessionController {
     public function login() {
 
         $_SESSION["message"] = "";
+        $_SESSION["condition"] = "";
 
         include("helper/regex-checks.php");
 
@@ -71,9 +72,11 @@ class SessionController {
                     $_SESSION["email"] = $_POST["email"];
                     $_SESSION["last_login"] = date("Y-m-d H:i:s");
                     $_SESSION["message"] = "Welcome {$_SESSION["username"]}! This is your first time logging in!";
+                    $_SESSION["condition"] = "good";
                     // Send user to the appropriate page (home)
+                    session_write_close();
                     header("Location: index.php");
-                    return;
+                    exit;
                 } else {
                     // User was in the database, verify password
                     if (password_verify($_POST["password"], $res[0]["password"])) {
@@ -82,24 +85,32 @@ class SessionController {
                         $_SESSION["email"] = $res[0]["email"];
                         $_SESSION["last_login"] = $res[0]["last_login"];
                         $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last on {$$_SESSION["last_login"]}";
+                        $_SESSION["condition"] = "neutral";
+                        session_write_close();
                         header("Location: index.php");
-                        return;
+                        exit;
                     } else {
                         $_SESSION["message"] = "Incorrect password.";
+                        $_SESSION["condition"] = "bad";
+                        session_write_close();
                         header("Location: login.php");
-                        return;
+                        exit;
                     }
                 }
             }
         } else {
             $_SESSION["message"] = "Please fill out all fields!";
+            $_SESSION["condition"] = "bad";
+            session_write_close();
             header("Location: login.php");
-            return;
+            exit;
         }
         // If something went wrong, show the welcome page again
         $_SESSION["message"] = "Something went wrong. Please refresh the page and try again.";
+        $_SESSION["condition"] =  "bad";
+        session_write_close();
         header("Location: login.php");
-        return;
+        exit;
     }
 
     /**
