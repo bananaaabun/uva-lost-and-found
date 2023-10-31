@@ -16,48 +16,8 @@
          <link rel="stylesheet" type="text/css" href="styles/main.css" >
     </head>  
     <body> 
-        <!-- Nav Bar -->
-        <nav id="primary-nav" class="fr">
-            <a href="index.html" class="fr" style="color: black; text-decoration: none;">
-                <img src="assets/logo.png" class="logo" alt="logo">
-                <h2>Lost & Found at UVA</h2>
-            </a>
-            <ul class="nav-list fr" style="height: 35px;">
-                <li><a href="makeRequest.html">Make a Request</a></li>
-                <li><a href="lostItemsPage.html">Lost Items</a></li>
-                <li>
-                    <a href="?command=showlogin" class="account-button center" style="padding: 20px;">
-                        <?php 
-                            if(!empty($_SESSION["username"])) {
-                                echo $_SESSION["username"];
-                            }
-                            else {
-                                echo "<img src=\"assets/profile-circle.svg\" alt=\"profilePic\" style=\"margin-right: 15px;\"> Log in";
-                            }
-                        ?>
-                    </a>
-                </li>
-            </ul>
-            <button onclick="openMenu()" id="nav-button">Menu</button>
-        </nav>
-        <div id="mobile-menu" class="fc">
-            <button onclick="closeMenu()" id="close-button">&times;</button>
-            <a href="makeRequest.html" class="ap">Make a Request</a>
-            <a href="lostItemsPage.html" class="ap">Lost Items</a>
-            <a href="login.html" class="ap">Account</a>
-        </div>
-        <script>
-            let menu = document.getElementById("mobile-menu");
-            function openMenu() {
-                menu.style.display = "flex";
-            }
-            function closeMenu() {
-                menu.style.display = "none";
-            }
-        </script>
-        <div class="nav-line"></div>
-         <!-- End of Nav Bar -->
-         <?=$message?>
+        <?=$message?>
+        <?php include("components/navbar.php"); ?>
 
          <!-- log in block -->
         <main class="fc center gap">
@@ -105,15 +65,6 @@
             </section>
         </main>
         
-         <!-- footer -->
-        <footer class="fc center">
-            <h1 style="margin-bottom: 45px;">Lost & Found</h1>
-            <nav class="bottom-nav">
-                <ul class="nav-list">
-                    <li><a href="lostItemsPage.html">Found Something</a></li>
-                    <li><a href="lostItemsPage.html">Lost Something</a></li>
-                </ul>
-            </nav>
-        </footer>
+         <?php include("components/footer.php"); ?>
     </body>
  </html>

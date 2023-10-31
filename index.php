@@ -7,6 +7,8 @@ spl_autoload_register(function ($classname) {
     include "data-and-classes/$classname.php";
 });
 
+include("Controller.php");
+
 $controller = new Controller($_GET);
 
 $controller->run();
