@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,41 +23,10 @@
     <meta name="keywords" content="lost and found portal">
 </head>
 <body>
-    <!-- Nav Bar -->
-    <nav id="primary-nav" class="fr">
-        <a href="index.html" class="fr" style="color: black; text-decoration: none;">
-            <img src="assets/logo.png" class="logo" alt="logo">
-            <h2>Lost & Found at UVA</h2>
-        </a>
-        <ul class="nav-list fr" style="height: 35px;">
-            <li><a href="makeRequest.html">Make a Request</a></li>
-            <li><a href="lostItemsPage.html">Lost Items</a></li>
-            <li>
-                <a href="login.html" class="account-button center" style="padding: 20px;">
-                    <img src="assets/profile-circle.svg" alt="profilePic" style="margin-right: 15px;"> Log in
-                </a>
-            </li>
-        </ul>
-        <button onclick="openMenu()" id="nav-button">Menu</button>
-    </nav>
-    <div id="mobile-menu" class="fc">
-        <button onclick="closeMenu()" id="close-button">&times;</button>
-        <a href="makeRequest.html" class="ap">Make a Request</a>
-        <a href="lostItemsPage.html" class="ap">Lost Items</a>
-        <a href="login.html" class="ap">Account</a>
-    </div>
-    <script>
-        let menu = document.getElementById("mobile-menu");
-        function openMenu() {
-            menu.style.display = "flex";
-        }
-        function closeMenu() {
-            menu.style.display = "none";
-        }
-    </script>
-    <div class="nav-line"></div>
-    <!-- End Nav Bar -->
-     <!-- containers for lost items -->
+    <?=$message?>
+    <?php include("components/navbar.php"); ?>
+
+    <!-- containers for lost items -->
     <div class="container mt-5">
         <div style="padding-left: 20px;">
             <div style="display: flex; align-items: center;">
