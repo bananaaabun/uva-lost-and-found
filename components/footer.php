@@ -8,3 +8,9 @@
         </ul>
     </nav>
 </footer>
+
+<?php
+
+// $_SESSION["message"] = ""; // RESET
+
+?>

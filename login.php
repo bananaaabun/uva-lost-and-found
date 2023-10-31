@@ -13,9 +13,6 @@ $session_controller = new SessionController($_GET);
 
 $session_controller->run();
 
-// $message = $_SESSION["message"];
-$message = "";
-
 ?>
 
 <!DOCTYPE html>

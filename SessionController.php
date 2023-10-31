@@ -46,18 +46,12 @@ class SessionController {
 
     }
 
-    public function showLogin() {
-        $message = "";
-        if (!empty($this->errorMessage))
-            $message .= "<p class='alert alert-danger'>".$this->errorMessage."</p>";
-        include("login.php");
-    }
-
     /**
      * Handle user registration and log-in
      */
     public function login() {
-        $message = "";
+
+        $_SESSION["message"] = "";
 
         include("helper/regex-checks.php");
 
@@ -87,6 +81,7 @@ class SessionController {
                         $_SESSION["username"] = $res[0]["username"];
                         $_SESSION["email"] = $res[0]["email"];
                         $_SESSION["last_login"] = $res[0]["last_login"];
+                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last on {$$_SESSION["last_login"]}";
                         header("Location: index.php");
                         return;
                     } else {
@@ -102,7 +97,7 @@ class SessionController {
             return;
         }
         // If something went wrong, show the welcome page again
-        $_SESSION["message"] = "Something went wrong. Please try again in a second.";
+        $_SESSION["message"] = "Something went wrong. Please refresh the page and try again.";
         header("Location: login.php");
         return;
     }
