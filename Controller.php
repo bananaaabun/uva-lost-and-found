@@ -70,7 +70,7 @@ class Controller {
     public function login() {
         $message = "";
 
-        include("regex-checks.php");
+        include("helper/regex-checks.php");
 
         if(isset($_POST["username"]) && !empty($_POST["username"]) &&
         isset($_POST["email"]) && !empty($_POST["email"]) &&
@@ -101,7 +101,7 @@ class Controller {
                         include("home.php");
                         return;
                     } else {
-                        $message .= "<p class='alert alert-danger'> Incorrect Passwor. </p>";
+                        $message .= "<p class='alert alert-danger'> Incorrect Password. </p>";
                         include("login.php");
                         return;
                     }
