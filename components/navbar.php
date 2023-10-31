@@ -7,7 +7,7 @@
         <li><a href="makeRequest.php">Make a Request</a></li>
         <li><a href="lostItemsPage.php">Lost Items</a></li>
         <li>
-            <a href="?command=showlogin" class="account-button center" style="padding: 20px;">
+            <a href="login.php" class="account-button center" style="padding: 20px;">
                 <?php 
                     if(!empty($_SESSION["username"])) {
                         echo $_SESSION["username"];
