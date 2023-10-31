@@ -1,5 +1,5 @@
 <nav id="primary-nav" class="fr">
-    <a href="home.php" class="fr" style="color: black; text-decoration: none;">
+    <a href="index.php" class="fr" style="color: black; text-decoration: none;">
         <img src="assets/logo.png" class="logo" alt="logo">
         <h2>Lost & Found at UVA</h2>
     </a>

@@ -3,15 +3,18 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-spl_autoload_register(function ($classname) {
-    include "data-and-classes/$classname.php";
-});
+// spl_autoload_register(function ($classname) {
+//     include "data-and-classes/$classname.php";
+// });
 
-include("SessionController.php");
+include_once "SessionController.php";
 
-$controller = new SessionController($_GET);
+$session_controller = new SessionController($_GET);
 
-$controller->run();
+$session_controller->run();
+
+// $message = $_SESSION["message"];
+$message = "";
 
 ?>
 
@@ -32,8 +35,7 @@ $controller->run();
          <title>UVA Lost and Found - Login</title>
          <link rel="stylesheet" type="text/css" href="styles/main.css" >
     </head>  
-    <body> 
-        <?=$message?>
+    <body>
         <?php include("components/navbar.php"); ?>
 
          <!-- log in block -->
@@ -43,7 +45,6 @@ $controller->run();
                 <hr>
                 <?php if(empty($_SESSION["username"])) { ?>
                             <h2>Login or Create Account</h2>
-                            <hr>
                             <form id="login-form" method="post" action="?command=login">
                                 <div class="form-group">
                                     <label for="username">Username</label>

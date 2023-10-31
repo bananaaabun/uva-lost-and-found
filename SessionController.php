@@ -1,6 +1,8 @@
 <?php
 
-class Controller {
+include_once "data-and-classes/Database.php";
+
+class SessionController {
 
     private $input = [];
 
@@ -13,6 +15,7 @@ class Controller {
      */
     public function __construct($input) {
         session_start();
+
         $this->db = new Database();
         
         $this->input = $input;
@@ -30,31 +33,17 @@ class Controller {
         $command = "welcome";
         if (isset($this->input["command"]))
             $command = $this->input["command"];
-        
+
         switch($command) {
-            case "showlogin":
-                $this->showLogin();
-                break;
             case "login":
                 $this->login();
                 break;
             case "logout":
                 $this->logout();
             default:
-                $this->showHome();
                 break;
         }
 
-    }
-
-    /**
-     * Show the home page to the user.
-     */
-    public function showHome() {
-        $message = "";
-        if (!empty($this->errorMessage))
-            $message .= "<p class='alert alert-danger'>".$this->errorMessage."</p>";
-        include("home.php");
     }
 
     public function showLogin() {
@@ -87,9 +76,9 @@ class Controller {
                     $_SESSION["username"] = $_POST["username"];
                     $_SESSION["email"] = $_POST["email"];
                     $_SESSION["last_login"] = date("Y-m-d H:i:s");
+                    $_SESSION["message"] = "Welcome {$_SESSION["username"]}! This is your first time logging in!";
                     // Send user to the appropriate page (home)
-                    // header("Location: ?command");
-                    include("home.php");
+                    header("Location: index.php");
                     return;
                 } else {
                     // User was in the database, verify password
@@ -98,23 +87,23 @@ class Controller {
                         $_SESSION["username"] = $res[0]["username"];
                         $_SESSION["email"] = $res[0]["email"];
                         $_SESSION["last_login"] = $res[0]["last_login"];
-                        include("home.php");
+                        header("Location: index.php");
                         return;
                     } else {
-                        $message .= "<p class='alert alert-danger'> Incorrect Password. </p>";
-                        include("login.php");
+                        $_SESSION["message"] = "Incorrect password.";
+                        header("Location: login.php");
                         return;
                     }
                 }
             }
         } else {
-            $message .= "<p class='alert alert-danger'> All fields are required. </p>";
-            include("login.php");
+            $_SESSION["message"] = "Please fill out all fields!";
+            header("Location: login.php");
             return;
         }
         // If something went wrong, show the welcome page again
-        $message .= "<p class='alert alert-danger'> Something went wrong. Please try again. </p>";
-        include("login.php");
+        $_SESSION["message"] = "Something went wrong. Please try again in a second.";
+        header("Location: login.php");
         return;
     }
 

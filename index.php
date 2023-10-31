@@ -2,14 +2,7 @@
 
 <?php
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-
-session_start(); 
-
-$message = "";
-if(!empty($_SESSION["message"]))
-    $message = $_SESSION["message"];
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -30,7 +23,6 @@ if(!empty($_SESSION["message"]))
          <link rel="stylesheet" type="text/css" href="styles/main.css" >
     </head>  
     <body>
-        <?=$message?>
         <?php include("components/navbar.php"); ?>
 
         <main class="fc center gap">
