@@ -87,6 +87,7 @@ class SessionController {
                         $_SESSION["username"] = $res[0]["username"];
                         $_SESSION["email"] = $res[0]["email"];
                         $_SESSION["last_login"] = $res[0]["last_login"];
+                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last on {$$_SESSION["last_login"]}";
                         header("Location: index.php");
                         return;
                     } else {

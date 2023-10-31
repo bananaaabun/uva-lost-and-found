@@ -1,3 +1,5 @@
+<?php include "message.php";  ?>
+
 <nav id="primary-nav" class="fr">
     <a href="index.php" class="fr" style="color: black; text-decoration: none;">
         <img src="assets/logo.png" class="logo" alt="logo">
