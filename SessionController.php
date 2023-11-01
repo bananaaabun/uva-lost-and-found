@@ -8,8 +8,6 @@ class SessionController {
 
     private  $db;
 
-    private $errorMessage = "";
-
     /**
      * Constructor
      */
@@ -50,7 +48,7 @@ class SessionController {
     }
 
     /**
-     * Handle user registration and log-in
+     * Populate the session with the user's items.
      */
     public function getUserItems() {
         $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
@@ -150,22 +148,26 @@ class SessionController {
                 // If logged in and correct submission allow change.
                 $new = $_POST["username"];
                 if ($old != $new) {
+                    // If the username is actually being changed
                     $_SESSION["message"] = "Username changed from {$old} to {$new}.";
                     $_SESSION["condition"] = "neutral";
                     $this->db->query("update users set username = $1 where email = $2;", $new , $_SESSION["email"]);
                     $_SESSION["username"] = $new;
                 }
                 else {
+                    // Username isn't changed.
                     $_SESSION["message"] = "Username needs to be different.";
                     $_SESSION["condition"] = "bad";
                 }
             }
             else {
+                // Username is not filled out
                 $_SESSION["message"] = "Please enter a new username.";
                 $_SESSION["condition"] = "bad";
             }
         }
         else {
+            // User tries to access this withot logging in
             $_SESSION["message"] = "Must be logged in.";
             $_SESSION["condition"] = "bad";
         }
