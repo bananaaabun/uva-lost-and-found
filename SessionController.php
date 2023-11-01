@@ -91,30 +91,40 @@ class SessionController {
                     header("Location: index.php");
                     exit;
                 } else {
-                    // User was in the database, verify password
-                    if (password_verify($_POST["password"], $res[0]["password"])) {
-                        // Password was correct
-                        $timestamp = date("Y-m-d H:i:s");
-                        $_SESSION["username"] = $res[0]["username"];
-                        $_SESSION["email"] = $res[0]["email"];
-                        $_SESSION["last_login"] = $res[0]["last_login"];
-                        // Update last login in the database after grabbing that variable
-                        $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
-                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
-                        $_SESSION["condition"] = "neutral";
-                        session_write_close();
-                        header("Location: index.php");
-                        exit;
-                    } else {
-                        $_SESSION["message"] = "Incorrect password.";
-                        $_SESSION["condition"] = "bad";
-                        session_write_close();
-                        header("Location: login.php");
-                        exit;
+                    // User was in the database, verify password & username
+                    if ($_POST["username"] == $res[0]["username"]) {
+                        if (password_verify($_POST["password"], $res[0]["password"])) {
+                            // Password was correct
+                            $timestamp = date("Y-m-d H:i:s");
+                            $_SESSION["username"] = $res[0]["username"];
+                            $_SESSION["email"] = $res[0]["email"];
+                            $_SESSION["last_login"] = $res[0]["last_login"];
+                            // Update last login in the database after grabbing that variable
+                            $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
+                            $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
+                            $_SESSION["condition"] = "neutral";
+                            session_write_close();
+                            header("Location: index.php");
+                            exit;
+                        } else {
+                            // Wrong password
+                            $_SESSION["message"] = "Incorrect password.";
+                            $_SESSION["condition"] = "bad";
+                            session_write_close();
+                            header("Location: login.php");
+                            exit;
+                        }
                     }
+                    // Wrong username
+                    $_SESSION["message"] = "Incorrect username.";
+                    $_SESSION["condition"] = "bad";
+                    session_write_close();
+                    header("Location: login.php");
+                    exit;
                 }
             }
         } else {
+            // Not everything filled out
             $_SESSION["message"] = "Please fill out all fields!";
             $_SESSION["condition"] = "bad";
             session_write_close();

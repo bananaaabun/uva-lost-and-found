@@ -37,18 +37,21 @@ $session_controller->run();
 
          <!-- log in block -->
         <main class="fc center gap">
-            <section class="fr stretch">
 
                 <?php   
                 
                     if(empty($_SESSION["username"])) {
 
+                        echo "<section class=\"fr stretch\">";
+
                         include("components/loginform.php");
                     
                     } else { 
+
+                        echo "<h1> {$_SESSION["username"]} </h1><section class=\"fr stretch\">";
                         
                         include("components/account.php");
-                        
+
                     }
                 ?>             
 
