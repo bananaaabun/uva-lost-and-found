@@ -1,6 +1,13 @@
 <?php
 
-session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+include "SubmissionController.php";
+
+$sub_controller = new SubmissionController($_GET);
+
+$sub_controller->run();
 
 ?>
 
@@ -29,13 +36,20 @@ session_start();
             <div class="submission-form">
                 <h2>Found an Item?</h2>
                 <hr>
-                <form method="POST" action="index.php?command=submitItem" enctype="multipart/form-data">
+                <form method="POST" action="?command=submit" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="itemName">Item Name:</label>
                         <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
                     </div>
                     <div class="form-group">
-                        <label for="itemDate">Date Found:</label>
+                        <label for="itemName">Did you lose or find this item?</label>
+                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg status" name="status" id="status">
+                            <option selected value="true">Lost</option>
+                            <option value="false">Found</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDate">Date Lost or Found:</label>
                         <input type="date" id="itemDate" name="itemDate">
                     </div>
                     <div class="form-group">
