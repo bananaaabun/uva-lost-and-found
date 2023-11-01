@@ -1,9 +1,8 @@
 <?php
 
 // Grab all corresponding posted items for that user from our API as JSON
-// $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
-// $id = $res[0]["user_id"];
-// $user_items = json_encode($this->db->query("select * from items where user_id = $1;", $id));
+$user_items = json_decode(
+    file_get_contents("http://localhost:8080/uva-lost-and-found/api/accountitems.php"), true); // TODO: MODIFY TO SERVER
 
 ?>
 

@@ -51,7 +51,7 @@ $session_controller->run();
 
                             include("components/modAccountForm.php");
                             
-                            // include("components/account.php"); // Not ready yet
+                            include("components/account.php"); // Not ready yet
                         }
                 ?>             
 
