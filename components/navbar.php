@@ -1,4 +1,4 @@
-<?php include "message.php";  ?>
+<?php include "message.php"; ?>
 
 <nav id="primary-nav" class="fr">
     <a href="index.php" class="fr" style="color: black; text-decoration: none;">
@@ -7,16 +7,15 @@
     </a>
     <ul class="nav-list fr" style="height: 35px;">
         <li><a href="makeRequest.php">Make a Request</a></li>
-        <li><a href="lostItemsPage.php">Lost Items</a></li>
+        <li><a href="?command=lostItemsPage">Lost Items</a></li>
         <li>
             <a href="login.php" class="account-button center" style="padding: 20px;">
-                <?php 
-                    if(!empty($_SESSION["username"])) {
-                        echo $_SESSION["username"];
-                    }
-                    else {
-                        echo "<img src=\"assets/profile-circle.svg\" alt=\"profilePic\" style=\"margin-right: 15px;\"> Log in";
-                    }
+                <?php
+                if (!empty($_SESSION["username"])) {
+                    echo $_SESSION["username"];
+                } else {
+                    echo "<img src=\"assets/profile-circle.svg\" alt=\"profilePic\" style=\"margin-right: 15px;\"> Log in";
+                }
                 ?>
             </a>
         </li>
