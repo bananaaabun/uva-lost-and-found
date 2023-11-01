@@ -75,7 +75,10 @@ $session_controller->run();
                                 </div>
                                 <button type="submit" value="Submit" class="button-primary">Logout</button>
                             </form>
-                        <?php } ?>             
+                <?php 
+                    // include("components/account.php"); // Not ready yet
+                    }
+                ?>             
 
             </section>
         </main>
