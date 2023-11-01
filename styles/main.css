@@ -47,12 +47,25 @@ a:hover {
     justify-content: center;
 }
 
+.stretch {
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.grow {
+    flex-grow: 1;
+}
+
 .gap {
     gap: 100px;
 }
 
 .gap-small {
     gap: 25px;
+}
+
+section {
+    width: 100%;
 }
 
 .img-large {
@@ -65,6 +78,7 @@ a:hover {
     border: 1px solid rgb(195, 195, 195);
     border-radius: 10px;
     padding: 50px;
+    margin: 20px;
 }
 
 #about a {

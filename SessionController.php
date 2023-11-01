@@ -38,12 +38,24 @@ class SessionController {
             case "login":
                 $this->login();
                 break;
+            case "newusername":
+                $this->changeUsername();
+                break;
             case "logout":
                 $this->logout();
             default:
                 break;
         }
 
+    }
+
+    /**
+     * Handle user registration and log-in
+     */
+    public function getUserItems() {
+        $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+        $id = $id_res[0]["user_id"];
+        $_SESSION["user_items"] = $db->query("select * from items where user_id = $1;", $id);
     }
 
     /**
@@ -79,30 +91,40 @@ class SessionController {
                     header("Location: index.php");
                     exit;
                 } else {
-                    // User was in the database, verify password
-                    if (password_verify($_POST["password"], $res[0]["password"])) {
-                        // Password was correct
-                        $timestamp = date("Y-m-d H:i:s");
-                        $_SESSION["username"] = $res[0]["username"];
-                        $_SESSION["email"] = $res[0]["email"];
-                        $_SESSION["last_login"] = $res[0]["last_login"];
-                        // Update last login in the database after grabbing that variable
-                        $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
-                        $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
-                        $_SESSION["condition"] = "neutral";
-                        session_write_close();
-                        header("Location: index.php");
-                        exit;
-                    } else {
-                        $_SESSION["message"] = "Incorrect password.";
-                        $_SESSION["condition"] = "bad";
-                        session_write_close();
-                        header("Location: login.php");
-                        exit;
+                    // User was in the database, verify password & username
+                    if ($_POST["username"] == $res[0]["username"]) {
+                        if (password_verify($_POST["password"], $res[0]["password"])) {
+                            // Password was correct
+                            $timestamp = date("Y-m-d H:i:s");
+                            $_SESSION["username"] = $res[0]["username"];
+                            $_SESSION["email"] = $res[0]["email"];
+                            $_SESSION["last_login"] = $res[0]["last_login"];
+                            // Update last login in the database after grabbing that variable
+                            $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
+                            $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
+                            $_SESSION["condition"] = "neutral";
+                            session_write_close();
+                            header("Location: index.php");
+                            exit;
+                        } else {
+                            // Wrong password
+                            $_SESSION["message"] = "Incorrect password.";
+                            $_SESSION["condition"] = "bad";
+                            session_write_close();
+                            header("Location: login.php");
+                            exit;
+                        }
                     }
+                    // Wrong username
+                    $_SESSION["message"] = "Incorrect username.";
+                    $_SESSION["condition"] = "bad";
+                    session_write_close();
+                    header("Location: login.php");
+                    exit;
                 }
             }
         } else {
+            // Not everything filled out
             $_SESSION["message"] = "Please fill out all fields!";
             $_SESSION["condition"] = "bad";
             session_write_close();
@@ -116,6 +138,42 @@ class SessionController {
         header("Location: login.php");
         exit;
     }
+    /**
+     * changeUsername
+     * 
+     * Change username, modifying it for both the session and the database.
+     */
+    public function changeUsername() {
+        if(!empty($_SESSION["email"])) {
+            $old = $_SESSION["username"];
+            if(!empty($_POST["username"])) {
+                // If logged in and correct submission allow change.
+                $new = $_POST["username"];
+                if ($old != $new) {
+                    $_SESSION["message"] = "Username changed from {$old} to {$new}.";
+                    $_SESSION["condition"] = "neutral";
+                    $this->db->query("update users set username = $1 where email = $2;", $new , $_SESSION["email"]);
+                    $_SESSION["username"] = $new;
+                }
+                else {
+                    $_SESSION["message"] = "Username needs to be different.";
+                    $_SESSION["condition"] = "bad";
+                }
+            }
+            else {
+                $_SESSION["message"] = "Please enter a new username.";
+                $_SESSION["condition"] = "bad";
+            }
+        }
+        else {
+            $_SESSION["message"] = "Must be logged in.";
+            $_SESSION["condition"] = "bad";
+        }
+        session_write_close();
+        header("Location: login.php");
+        exit;
+    }
+
 
     /**
      * Log out the user
@@ -125,4 +183,13 @@ class SessionController {
         session_destroy();
         session_start();
     }
+
+    /**
+     * Return home
+     */
+    public function goHome() {
+        header("Location: index.php");
+        exit;
+    }
+
 }
