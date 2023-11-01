@@ -38,6 +38,9 @@ class SessionController {
             case "login":
                 $this->login();
                 break;
+            case "newusername":
+                $this->changeUsername();
+                break;
             case "logout":
                 $this->logout();
             default:
@@ -116,6 +119,42 @@ class SessionController {
         header("Location: login.php");
         exit;
     }
+    /**
+     * changeUsername
+     * 
+     * Change username, modifying it for both the session and the database.
+     */
+    public function changeUsername() {
+        if(!empty($_SESSION["email"])) {
+            $old = $_SESSION["username"];
+            if(!empty($_POST["username"])) {
+                // If logged in and correct submission allow change.
+                $new = $_POST["username"];
+                if ($old != $new) {
+                    $_SESSION["message"] = "Username changed from {$old} to {$new}.";
+                    $_SESSION["condition"] = "neutral";
+                    $this->db->query("update users set username = $1 where email = $2;", $new , $_SESSION["email"]);
+                    $_SESSION["username"] = $new;
+                }
+                else {
+                    $_SESSION["message"] = "Username needs to be different.";
+                    $_SESSION["condition"] = "bad";
+                }
+            }
+            else {
+                $_SESSION["message"] = "Please enter a new username.";
+                $_SESSION["condition"] = "bad";
+            }
+        }
+        else {
+            $_SESSION["message"] = "Must be logged in.";
+            $_SESSION["condition"] = "bad";
+        }
+        session_write_close();
+        header("Location: login.php");
+        exit;
+    }
+
 
     /**
      * Log out the user
@@ -125,4 +164,13 @@ class SessionController {
         session_destroy();
         session_start();
     }
+
+    /**
+     * Return home
+     */
+    public function goHome() {
+        header("Location: index.php");
+        exit;
+    }
+
 }

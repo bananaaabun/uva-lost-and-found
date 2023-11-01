@@ -1,9 +1,9 @@
 <?php
 
-// Grab all corresponding posted items for that user
-$id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
-$id = $res[0]["user_id"];
-$user_items = json_encode($this->db->query("select * from items where user_id = $1;", $id));
+// Grab all corresponding posted items for that user from our API as JSON
+// $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+// $id = $res[0]["user_id"];
+// $user_items = json_encode($this->db->query("select * from items where user_id = $1;", $id));
 
 ?>
 

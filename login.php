@@ -38,46 +38,21 @@ $session_controller->run();
          <!-- log in block -->
         <main class="fc center gap">
             <section id="login" class="fc center outline">
-                <img src="assets/logo.png" style="width: 200px;" alt="logo">
-                <hr>
-                <?php if(empty($_SESSION["username"])) { ?>
-                            <h2>Login or Create Account</h2>
-                            <form id="login-form" method="post" action="?command=login">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter username">
-                                    <small id="emailHelp" class="form-text text-muted"></small>
-                                </div>
-                                <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted"></small>
-                                </div>
-                                <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Password">
-                                </div>
-                                <button type="submit" value="Submit" class="button-primary">Submit</button>
-                            </form>
-                <?php } else { echo "<h2>Hi, {$_SESSION["username"]}</h2>"; ?>
-                            <hr>
-                            <p>Account Details</p>
-                            <form id="login-form" method="post" action="?command=logout">
-                                <div class="form-group">
-                                    <label for="username">Username</label>
-                                    <?php echo "<input type=\"text\" class=\"form-control\" aria-describedby=\"username\" readonly placeholder=\"{$_SESSION["username"]}\">"; ?>
-                                    <small id="emailHelp" class="form-text text-muted"></small>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <?php echo "<input type=\"text\" class=\"form-control\" aria-describedby=\"emailHelp\" readonly placeholder=\"{$_SESSION["email"]}\">"; ?>
-                                <small id="emailHelp" class="form-text text-muted"></small>
-                                </div>
-                                <button type="submit" value="Submit" class="button-primary">Logout</button>
-                            </form>
-                <?php 
-                    // include("components/account.php"); // Not ready yet
-                    }
+
+                <img src="assets/logo.png" style="width: 200px;" alt="logo"><hr>
+
+                <?php   if(empty($_SESSION["username"])) {
+
+                            include("components/loginform.php");
+                        
+                        } else { 
+                            
+                            echo "<h2>Hi, {$_SESSION["username"]}</h2><hr>";
+
+                            include("components/modAccountForm.php");
+                            
+                            // include("components/account.php"); // Not ready yet
+                        }
                 ?>             
 
             </section>

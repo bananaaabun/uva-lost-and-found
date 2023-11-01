@@ -15,9 +15,9 @@ spl_autoload_register(function ($classname) {
     include "$classname.php";
 });
 
-$controller = new Controller($_GET);
+// $controller = new Controller($_GET);
 
-$controller->run();
+// $controller->run();
 
 session_start();
 
