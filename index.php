@@ -48,8 +48,8 @@ session_start();
                 <div class="img-large fc gap-small">
                     <h2>About Lost & Found</h2>
                     <p>The portal seeks to bridge the UVA community gaps by linking individuals who have misplaced items with those who've located them. Through a digital platform, members can swiftly report, search, and communicate regarding these items.</p>
-                    <a class="button-one" href="lostItemsPage.html">I've lost something!</a>
-                    <a class="button-two" href="makeRequest.html">I've found something!</a>
+                    <a class="button-one" href="lostItemsPage.php">I've lost something!</a>
+                    <a class="button-two" href="makeRequest.php">I've found something!</a>
                 </div>
             </section>
         </main>

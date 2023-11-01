@@ -18,39 +18,43 @@
 <body>
     <?php include("components/navbar.php"); ?>
 
-    <!-- containers for lost items -->
-    <div class="container mt-5">
-        <div style="padding-left: 20px;">
-            <div style="display: flex; align-items: center;">
-                <h1 style="margin-right: 50px;">Lost Items</h1>
-            <div class="searchBar" style="margin-left: 50px;">
-                <input type="text" class="form-control" placeholder="Search for items...">
+    <main class="fc center gap">
+
+        <!-- containers for lost items -->
+        <div class="container mt-5">
+            <div style="padding-left: 20px;">
+                <div style="display: flex; align-items: center;">
+                    <h1 style="margin-right: 50px;">Lost Items</h1>
+                <div class="searchBar" style="margin-left: 50px;">
+                    <input type="text" class="form-control" placeholder="Search for items...">
+                </div>
+                </div>
             </div>
+            <hr>
+            <div class="lostItems d-flex flex-wrap justify-content-between">
+
+            <?php 
+                // Print out each item as a lost/found cell
+                for($i = 0; $i < sizeof($all_items); $i += 1) {
+                    $cur_item = $all_items[$i];
+                    // print_r($cur_item);
+                    $img_src = "uploads/" . $cur_item["image_file_name"];
+                    $item_id = $cur_item["item_id"];
+                    // echo $img_src;
+                    echo "  
+                            <a href=\"?command=itemPage-{$item_id}\" style=\"color: black;\">
+                                <div class=\"lost-item\">{$cur_item["item_name"]}
+                                    <img src=\"{$img_src}\" style=\"width:100px;\" >
+                                </div>
+                            </a>
+                        ";
+                }
+
+            ?>
             </div>
         </div>
-        <hr>
-        <div class="lostItems d-flex flex-wrap justify-content-between">
 
-        <?php 
-            // Print out each item as a lost/found cell
-            for($i = 0; $i < sizeof($all_items); $i += 1) {
-                $cur_item = $all_items[$i];
-                // print_r($cur_item);
-                $img_src = "uploads/" . $cur_item["image_file_name"];
-                $item_id = $cur_item["item_id"];
-                // echo $img_src;
-                echo "  
-                        <a href=\"?command=itemPage-{$item_id}\" style=\"color: black;\">
-                            <div class=\"lost-item\">{$cur_item["item_name"]}
-                                <img src=\"{$img_src}\" style=\"width:100px;\" >
-                            </div>
-                        </a>
-                     ";
-            }
-
-        ?>
-        </div>
-    </div>
+    </main>
     
     <!-- footer -->
     <footer class="fc center">
