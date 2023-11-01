@@ -5,6 +5,6 @@ class Config {
         "port" => 5433,
         "user" => "localuser",
         "pass" => "cs4640LocalUser!",
-        "database" => "example"
+        "database" => "postgres"
     ];
 }

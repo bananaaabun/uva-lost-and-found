@@ -2,21 +2,23 @@
 
 include_once "data-and-classes/Database.php";
 
-class Controller {
+class Controller
+{
 
     private $input = [];
 
-    private  $db;
+    private $db;
 
     private $errorMessage = "";
 
     /**
      * Constructor
      */
-    public function __construct($input) {
+    public function __construct($input)
+    {
         session_start();
         $this->db = new Database();
-        
+
         $this->input = $input;
     }
 
@@ -27,13 +29,14 @@ class Controller {
      * which command to execute based on the given "command"
      * parameter.  Default is the welcome page.
      */
-    public function run() {
+    public function run()
+    {
         // Get the command
         $command = "welcome";
         if (isset($this->input["command"]))
             $command = $this->input["command"];
-        
-        switch($command) {
+
+        switch ($command) {
             case "lostItemsPage":
                 $this->showLostItemsPage();
                 break;
@@ -53,10 +56,11 @@ class Controller {
     /**
      * Show the home page to the user.
      */
-    public function showHome() {
+    public function showHome()
+    {
         $message = "";
         if (!empty($this->errorMessage))
-            $message .= "<p class='alert alert-danger'>".$this->errorMessage."</p>";
+            $message .= "<p class='alert alert-danger'>" . $this->errorMessage . "</p>";
         include("home.php");
     }
 
@@ -73,10 +77,13 @@ class Controller {
 
     public function showLostItemsPage()
     {
+        $items = $this->getLostItems();
         $message = "";
         if (!empty($this->errorMessage))
             $message .= "<p class='alert alert-danger'>" . $this->errorMessage . "</p>";
-        header("Location: lostItemsPage.php");
+        // header("Location: lostItemsPage.php");
+        // include_once("lostItemsPage.php");
+        include("lostItemsPage.php");
     }
 
     public function submitItem()
@@ -97,13 +104,13 @@ class Controller {
         $itemDate = $_POST['itemDate'];
         $itemLocation = $_POST['itemLocation'];
         $itemDescription = $_POST['itemDescription'];
-        $itemImage = $_POST['itemImage'];
+        $itemImage = null;
 
         // Check if date is in the future
         $currentDate = date("Y-m-d");
         if ($itemDate > $currentDate) {
             echo "<script>alert('Date cannot be in future.')</script>";
-            include_once("makeRequest.html");
+            include_once("makeRequest.php");
             return;
         }
 
@@ -112,69 +119,68 @@ class Controller {
             $targetFile = $uploadDirectory . basename($_FILES['itemImage']['name']);
             $uploadOk = true;
             $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-            // Check if image file is an actual image or fake image
-            $check = getimagesize($_FILES['itemImage']['tmp_name']);
-            if ($check !== false) {
-                $uploadOk = 1;
-            } else {
-                $this->errorMessage = "File is not an image.";
-                $uploadOk = 0;
-            }
-
             // Check if file already exists
             if (file_exists($targetFile)) {
                 $this->errorMessage = "Sorry, file already exists.";
-                $uploadOk = 0;
+                $uploadOk = false;
+            }
+            // Check file sizeif (!empty($_FILES['itemImage']['tmp_name'])) {
+            $check = getimagesize($_FILES['itemImage']['tmp_name']);
+            if ($check !== false) {
+                $uploadOk = true;
             }
 
-            // Check file size
             if ($_FILES['itemImage']['size'] > 500000) { // 500KB limit
                 $this->errorMessage = "Sorry, your file is too large.";
-                $uploadOk = 0;
+                $uploadOk = false;
             }
-
             // Allow certain file formats
             if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 $this->errorMessage = "Sorry, only JPG, JPEG, and PNG files are allowed.";
-                $uploadOk = 0;
+                $uploadOk = false;
             }
-
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-                $this->errorMessage = "Sorry, your file was not uploaded.";
+            // Check if $uploadOk is false if not set to target file
+            if ($uploadOk && move_uploaded_file($_FILES['itemImage']['tmp_name'], $targetFile)) {
+                $itemImage = $targetFile; // Set to the path where the file is moved
             } else {
-                if (move_uploaded_file($_FILES['itemImage']['tmp_name'], $targetFile)) {
-                    echo "The file " . basename($_FILES['itemImage']['name']) . " has been uploaded.";
-                    $itemImage = "temp/path/does/not/exist"; // Set the path to the successfully uploaded image.
-                } else {
-                    $this->errorMessage = "Sorry, there was an error uploading your file.";
-                }
-            }
-            //if no error message show success message pop up
-            if(empty($this->errorMessage)){
-                echo "<script>alert('Item successfully submitted.')</script>";
-
+                $uploadOk = false;
             }
         }
-        // Sanitize the input data
-        $itemName = pg_escape_string($itemName);
-        $itemDate = pg_escape_string($itemDate);
-        $itemLocation = pg_escape_string($itemLocation);
-        $itemDescription = pg_escape_string($itemDescription);
-        // $itemImage = "temp/path/does/not/exist";
+        if (!empty($this->errorMessage)) {
+            echo "<script>alert('" . $this->errorMessage . "')</script>";
+        }
 
-        $res = $this->db->query(
-            "INSERT INTO items (item_name, date_added, location_found, description, image) VALUES ($1, $2, $3, $4, $5)",
-            $itemName,
-            $itemDate,
-            $itemLocation,
-            $itemDescription,
-            $itemImage
-        );
+        if ($uploadOk && empty($this->errorMessage)) {
 
-        header("Location: lostItemsPage.php");
+            $res = $this->db->query(
+                "INSERT INTO items (item_name, date_added, location_found, description, image) VALUES ($1, $2, $3, $4, $5)",
+                $itemName,
+                $itemDate,
+                $itemLocation,
+                $itemDescription,
+                $targetFile
+            );
+
+            if ($res === false) {
+                $this->errorMessage = "Error submitting item.";
+                include_once("makeRequest.php");
+                return;
+            } else {
+                echo "<script>alert('Item submitted successfully.')</script>";
+            }
+
+        }
 
     }
-
+    public function getLostItems()
+    {
+        $query = "SELECT * FROM items";
+        try {
+            $items = $this->db->query($query);
+        } catch (Exception $e) {
+            echo "Error querying the database.";
+            exit;
+        }
+        return $items;
+    }
 }
