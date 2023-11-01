@@ -37,22 +37,19 @@ $session_controller->run();
 
          <!-- log in block -->
         <main class="fc center gap">
-            <section id="login" class="fc center outline">
+            <section class="fr stretch">
 
-                <img src="assets/logo.png" style="width: 200px;" alt="logo"><hr>
+                <?php   
+                
+                    if(empty($_SESSION["username"])) {
 
-                <?php   if(empty($_SESSION["username"])) {
-
-                            include("components/loginform.php");
+                        include("components/loginform.php");
+                    
+                    } else { 
                         
-                        } else { 
-                            
-                            echo "<h2>Hi, {$_SESSION["username"]}</h2><hr>";
-
-                            include("components/modAccountForm.php");
-                            
-                            include("components/account.php"); // Not ready yet
-                        }
+                        include("components/account.php");
+                        
+                    }
                 ?>             
 
             </section>

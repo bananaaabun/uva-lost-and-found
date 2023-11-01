@@ -52,6 +52,15 @@ class SessionController {
     /**
      * Handle user registration and log-in
      */
+    public function getUserItems() {
+        $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+        $id = $id_res[0]["user_id"];
+        $_SESSION["user_items"] = $db->query("select * from items where user_id = $1;", $id);
+    }
+
+    /**
+     * Handle user registration and log-in
+     */
     public function login() {
 
         $_SESSION["message"] = "";
