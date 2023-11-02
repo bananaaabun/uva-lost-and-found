@@ -7,7 +7,7 @@
     </a>
     <ul class="nav-list fr" style="height: 35px;">
         <li><a href="makeRequest.php">Make a Request</a></li>
-        <li><a href="?command=lostItemsPage">Lost Items</a></li>
+        <li><a href="lostItemsPage.php">Lost Items</a></li>
         <li>
             <a href="login.php" class="account-button center" style="padding: 20px;">
                 <?php

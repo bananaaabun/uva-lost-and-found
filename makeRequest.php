@@ -34,7 +34,7 @@ $sub_controller->run();
 
         <div class="container">
             <div class="submission-form">
-                <h2>Found an Item?</h2>
+                <h2>Lost or Found an Item?</h2>
                 <hr>
                 <form method="POST" action="?command=submit" enctype="multipart/form-data">
                     <div class="form-group">
