@@ -60,6 +60,15 @@ class SessionController {
         }
     }
 
+    public function addCookies() {
+        $cookie_name = "username";
+        $cookie_value = $_SESSION["username"];
+        setcookie($cookie_name, $cookie_value, time() + 90000, "/");
+        $cookie_name = "email";
+        $cookie_value = $_SESSION["email"];
+        setcookie($cookie_name, $cookie_value, time() + 90000, "/");
+    }
+
     /**
      * Handle user registration and log-in
      */
@@ -89,6 +98,7 @@ class SessionController {
                     $_SESSION["message"] = "Welcome {$_SESSION["username"]}! This is your first time logging in!";
                     $_SESSION["condition"] = "good";
                     // Send user to the appropriate page (home)
+                    $this->addCookies();
                     session_write_close();
                     header("Location: index.php");
                     exit;
@@ -105,6 +115,7 @@ class SessionController {
                             $this->db->query("update users set last_login = $1 where email = $2;", $timestamp , $_SESSION["email"]);
                             $_SESSION["message"] = "Welcome {$_SESSION["username"]}! You were last here on {$_SESSION["last_login"]}.";
                             $_SESSION["condition"] = "neutral";
+                            $this->addCookies();
                             session_write_close();
                             header("Location: index.php");
                             exit;
@@ -157,6 +168,7 @@ class SessionController {
                     $_SESSION["condition"] = "neutral";
                     $this->db->query("update users set username = $1 where email = $2;", $new , $_SESSION["email"]);
                     $_SESSION["username"] = $new;
+                    $this->addCookies();
                 }
                 else {
                     // Username isn't changed.
