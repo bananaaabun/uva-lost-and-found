@@ -42,7 +42,7 @@ $sub_controller->run();
                         <input type="text" id="itemName" name="itemName" placeholder="e.g., Earring">
                     </div>
                     <div class="form-group">
-                        <label for="itemName">Did you lose or find this item?</label>
+                        <label for="itemStatus">Did you lose or find this item?</label>
                         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg status" name="status" id="status">
                             <option selected value="true">Lost</option>
                             <option value="false">Found</option>

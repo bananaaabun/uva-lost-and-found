@@ -7,11 +7,11 @@
         <div class="form-group">
             <label for="username">Username</label>
             <?php if (empty($_COOKIE["username"])) { ?>
-                <input type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp" placeholder="Enter username">
+                <input type="text" class="form-control" name="username" id="username" aria-describedby="userName" placeholder="Enter username">
             <?php } else {
-                echo "<input type=\"text\" class=\"form-control\" name=\"username\" id=\"username\" aria-describedby=\"emailHelp\" value=\"{$_COOKIE["username"]}\">";
+                echo "<input type=\"text\" class=\"form-control\" name=\"username\" id=\"username\" aria-describedby=\"userName\" value=\"{$_COOKIE["username"]}\">";
             } ?>
-            <small id="emailHelp" class="form-text text-muted"></small>
+            <small id="userName" class="form-text text-muted"></small>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
