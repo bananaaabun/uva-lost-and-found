@@ -40,10 +40,18 @@
                     // print_r($cur_item);
                     $img_src = "uploads/" . $cur_item["image_file_name"];
                     $item_id = $cur_item["item_id"];
-                    // echo $img_src;
+                    $lf_status = $cur_item["lf_status"];
+                    if ($lf_status == "t") {
+                        $lf_status = "Lost";
+                    }
+                    else {
+                        $lf_status = "Found";
+                    }
                     echo "  
-                            <a href=\"?command=itemPage-{$item_id}\" style=\"color: black;\">
-                                <div class=\"lost-item\">{$cur_item["item_name"]}
+                            <a href=\"?command=itemPage-{$item_id}\" style=\"color: black; text-decoration: none;\">
+                                <div class=\"lost-item fc center lost-item-container\">
+                                    <h4 style=\"font-weight:bold;\">{$cur_item["item_name"]}<h4>
+                                    <p>Status: {$lf_status} </p>
                                     <img src=\"{$img_src}\" style=\"width:100px;\" >
                                 </div>
                             </a>
@@ -57,13 +65,5 @@
     </main>
     
     <!-- footer -->
-    <footer class="fc center">
-        <h1 style="margin-bottom: 45px;">Lost & Found</h1>
-        <nav class="bottom-nav">
-            <ul class="nav-list">
-                <li><a href="makeRequest.html">Found Something</a></li>
-                <li><a href="lostItemsPage.html">Lost Something</a></li>
-            </ul>
-        </nav>
-    </footer>
+    <?php include("components/footer.php"); ?>
 </body>
