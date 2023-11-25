@@ -169,12 +169,6 @@ class SubmissionController {
                 }
             }
         }
-        // Sanitize the input data
-        // $itemName = pg_escape_string($itemName);
-        // $itemDate = pg_escape_string($itemDate);
-        // $itemLocation = pg_escape_string($itemLocation);
-        // $itemDescription = pg_escape_string($itemDescription);
-        // $itemImage = "temp/path/does/not/exist";
 
         $res = $this->db->query(
             "INSERT INTO items (user_id, item_name, date_added, location_found, item_description, image_file_name, lf_status) VALUES ($1, $2, $3, $4, $5, $6, $7)",
