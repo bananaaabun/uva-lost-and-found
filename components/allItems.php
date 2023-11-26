@@ -50,7 +50,8 @@
                 </div>
             </div>
             <hr>
-            <div class="lost-item fc center lost-item-container" data-item-name="<?= $cur_item["item_name"]; ?>">
+            <div class="lostItems d-flex flex-wrap justify-content-between">
+            <!-- <div class="fc center" data-item-name="<?= $cur_item["item_name"]; ?>"> -->
             <?php 
                 // Print out each item as a lost/found cell
                 for($i = 0; $i < sizeof($all_items); $i += 1) {
