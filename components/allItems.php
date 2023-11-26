@@ -56,8 +56,7 @@
                 </div>
             </div>
             <hr>
-            <div class="lostItems d-flex flex-wrap justify-content-between"
-                data-item-name="<?= $cur_item["item_name"]; ?>">
+            <div class="lostItems d-flex flex-wrap justify-content-between">
                 <?php
                 // Print out each item as a lost/found cell
                 for ($i = 0; $i < sizeof($all_items); $i += 1) {
