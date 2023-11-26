@@ -34,8 +34,11 @@ class ItemController {
             $command = $this->input["command"];
         
         switch($command) {
-            case "showitem": // Use regex to check if command starts with this. Split on dash. Thing after dash it item id.
-                $this->displayItem($item_id);
+             // Use regex to check if command starts with this. Split on dash. Thing after dash it item id.
+            case preg_match('/itemPage-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->showItemById($item_id);
+                break; 
             default:
                 $this->displayAllItems();
                 break;
@@ -46,6 +49,12 @@ class ItemController {
     public function displayAllItems() {
         $all_items = $this->db->query("select * from items;");
         include("components/allItems.php");
+        exit;
+    }
+
+    public function showItemById($item_id) {
+        //not done
+        $item = $this->db->query("select * from items where item_id = {$item_id};");
         exit;
     }
 
