@@ -14,25 +14,43 @@
     <meta name="author" content="Barna Alimu and Nate Gleberman">
     <meta name="description" content="Page detailing a lost item">
     <meta name="keywords" content="lost and found portal">
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchInput');
+        const items = document.querySelectorAll('.lost-item');
+
+        searchInput.addEventListener('input', function() {
+            const searchText = searchInput.value.toLowerCase();
+
+            items.forEach(item => {
+                const itemName = item.getAttribute('data-item-name').toLowerCase();
+                if (itemName.includes(searchText)) {
+                    item.style.display = ''; // Show item
+                } else {
+                    item.style.display = 'none'; // Hide item
+                }
+            });
+        });
+    });
+</script>
+
 </head>
 <body>
     <?php include("components/navbar.php"); ?>
 
     <main class="fc center gap">
-
         <!-- containers for lost items -->
         <div class="container mt-5">
             <div style="padding-left: 20px;">
                 <div style="display: flex; align-items: center;">
                     <h1 style="margin-right: 50px;">Lost Items</h1>
                 <div class="searchBar" style="margin-left: 50px;">
-                    <input type="text" class="form-control" placeholder="Search for items...">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search for items...">
                 </div>
                 </div>
             </div>
             <hr>
-            <div class="lostItems d-flex flex-wrap justify-content-between">
-
+            <div class="lost-item fc center lost-item-container" data-item-name="<?= $cur_item["item_name"]; ?>">
             <?php 
                 // Print out each item as a lost/found cell
                 for($i = 0; $i < sizeof($all_items); $i += 1) {
