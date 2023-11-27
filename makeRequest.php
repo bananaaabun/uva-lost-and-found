@@ -53,7 +53,6 @@ $sub_controller->run();
 </head>
 
 <body>
-    <!-- <?= $message ?> -->
     <?php include("components/navbar.php"); ?>
 
     <div class="container">

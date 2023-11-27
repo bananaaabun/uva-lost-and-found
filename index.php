@@ -13,20 +13,11 @@ sources:
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-spl_autoload_register(function ($classname) {
-    include "$classname.php";
-});
-
-// $controller = new Controller($_GET);
-
-// $controller->run();
-
 session_start();
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

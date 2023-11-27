@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <link rel="stylesheet" href="styles/singleItems.css">
     <link rel="stylesheet" href="styles/main.css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,7 +18,6 @@
 </head>
 
 <body>
-    <?= $_SESSION["message"] ?>
     <?php include("components/navbar.php"); ?>
 
     <section class="sectionContainer">
@@ -64,20 +62,7 @@
                 <!-- Change to green if claimed and pull status from db-->
             </div>
             <!-- Chat container -->
-            <div class="chatContainer mt-2">
-                <div class="chatHeader text-white p-2 rounded-top">
-                    Chat about this item
-                </div>
-                <div class="chatBody p-3"
-                    style="height: 200px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
-                    <p><strong>User A:</strong> Did anyone claim this yet, I think this is mine?</p>
-                    <p><strong>User B:</strong> No, I found it at newcomb</p>
-                </div>
-                <div class="chatFooter p-2 bg-light rounded-bottom">
-                    <input type="text" class="form-control" placeholder="Type your message...">
-                    <button class="button-primary" style="margin-left: 5px;">Send</button>
-                </div>
-            </div>
+            <?php include("components/chat.php"); ?>
         </div>
     </section>
     <?php include("components/footer.php"); ?>
