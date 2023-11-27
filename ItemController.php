@@ -79,7 +79,7 @@ class ItemController
 
     public function getChat($item_id) {
         // Return JSON record of chats
-        $chats = $db->query("select * from chats where item_id = $1;", $item_id);
+        $chats = $this->db->query("select * from chats where item_id = $1;", $item_id);
         if (!isset($chats[0])) {
             die("No questions in the database");
         }
@@ -89,9 +89,15 @@ class ItemController
 
     public function addChat($item_id) {
         // Add chatline passed in from POST to database, return updated chat.
-        $chats = $db->query("select * from chats where item_id = $1;", $item_id);
-
-        return getChat($item_id);
+        if(!empty($_POST["chat"]) && !empty($_SESSION["username"])) {
+            // If logged in and correct submission allow change.
+            $this->db->query("insert into chats where");
+        }
+        else {
+            $_SESSION["message"] = "Must be logged in to use forum features.";
+            $_SESSION["condition"] = "bad";   
+        }
+        getChat($item_id);
     }
 
 }

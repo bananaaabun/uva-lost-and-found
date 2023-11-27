@@ -92,15 +92,7 @@ ini_set("display_errors", 1);
                     let idContainer = document.getElementById("itemId");
                     let item_id = idContainer.innerHTML;
 
-                    $("#chatBody").load("components/chat.php?item_id=" + item_id);
-
-    //                 $("#chatBody").load("components/chat.php?item_id=" + item_id, function(response, status, xhr) {
-    // if (status == "error") {
-    //     console.log("Error loading content:", xhr.status, xhr.statusText);
-    // } else {
-    //     console.log("Content loaded successfully:", response);
-    // }
-// });
+                    $("#chatBody").load("components/chat.php?getChat=" + item_id);
 
                 </script>
 
