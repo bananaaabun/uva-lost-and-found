@@ -6,6 +6,8 @@ sources:
         Help with an error on messages 
     2. https://www.w3schools.com/csS/css3_shadows_box.asp
         Cool shadow effects on boxes
+    3. https://stackoverflow.com/questions/10800355/remove-whitespaces-inside-a-string-in-javascript
+        Remove spaces from string
     
 -->
 <?php

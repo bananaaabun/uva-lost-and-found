@@ -79,20 +79,86 @@ ini_set("display_errors", 1);
 
                 <!-- chat content -->
                 <div id="chatBody" class="chatBody p-3" style="height: 200px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
+                
                 </div>
 
                 <!-- send new chat -->
-                <form class="chatFooter p-2 bg-light rounded-bottom">
-                    <input type="text" class="form-control" placeholder="Type your message...">
-                    <button class="button-primary" style="margin-left: 5px;">Send</button>
-                </form>
+                <div id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
+                    <input id="chatBox" type="text" class="form-control" placeholder="Type your message...">
+                    <button id="chatButton" class="button-primary" style="margin-left: 5px;">Send</button>
+                </div>
 
                 <script>
 
                     let idContainer = document.getElementById("itemId");
-                    let item_id = idContainer.innerHTML;
+                    let chatButton = document.getElementById("chatButton");
+                    let itemId = idContainer.innerHTML.replace(/\s/g, "");
+                    var chats;
 
-                    $("#chatBody").load("components/chat.php?getChat=" + item_id);
+                    // $("#chatBody").load("components/chat.php?getChat=" + itemId);
+
+                    function loadChat() {
+                        console.log("loading chats");
+                        // $.get("?command=getChat-"+itemId, function(data) {
+                        //     chats = data;
+                        //     displayChats();
+                        // });
+
+                        var ajax = new XMLHttpRequest();
+                        ajax.open("GET", "?command=getChat-"+itemId, true);
+                        ajax.responseType = "json";
+                        ajax.send(null);
+
+                        ajax.addEventListener("load", function() {
+                            // display the question
+                            if (this.status == 200) {
+                                chats = this.response;
+                                displayChats(chats);
+                            } else {
+                                // Error message
+                                console.log("error");
+                            }
+                        });
+                    }
+
+                    function displayChats(c) {
+                        console.log("Displaying chats.");
+                        let chatBody = document.getElementById("chatBody");
+                        chatBody.innerHTML = "";
+                        // if (!c)
+                        //     console.log('here');
+                        //     chatBody.innerHTML = "Start chatting now!";
+                        //     return;
+                        c.forEach(chat => {
+                            console.log(chat);
+                            let p = document.createElement("p");
+                            p.innerHTML = `<strong>${chat["sender_id"]}</strong> ${chat["message"]}`;
+                            chatBody.appendChild(p);
+                        })
+                    }
+
+                    function sendChat(itemId) {
+                        let chatBox = document.getElementById("chatBox");
+                        let chatValue = chatBox.value;
+                        console.log("Sending chat - " + chatValue);
+                        if (!chatValue)
+                            return
+                        $.post("?command=addChat-" + itemId,
+                            {
+                                chat: chatValue,
+                            },
+                            function() {
+                                loadChat();
+                            }
+                        )
+                    }
+
+                    chatButton.addEventListener("click", (event) => {
+                        console.log("clicked");
+                        sendChat(itemId);
+                    });
+
+                    loadChat();
 
                 </script>
 

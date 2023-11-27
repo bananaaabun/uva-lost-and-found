@@ -35,7 +35,6 @@ class ItemController
         $command = "";
         if (isset($this->input["command"]))
             $command = $this->input["command"];
-
         switch ($command) {
             // Use regex to check if command starts with this. Split on dash. Thing after dash it item id.
             case preg_match('/itemPage-(\d+)/', $command, $matches) ? $command : !$command:
@@ -44,7 +43,7 @@ class ItemController
                 break;
             case preg_match('/getChat-(\d+)/', $command, $matches) ? $command : !$command:
                 $item_id = $matches[1];
-                $this->showItemById($item_id);
+                $this->getChat($item_id);
                 break;
             case preg_match('/addChat-(\d+)/', $command, $matches) ? $command : !$command:
                 $item_id = $matches[1];
@@ -81,23 +80,33 @@ class ItemController
         // Return JSON record of chats
         $chats = $this->db->query("select * from chats where item_id = $1;", $item_id);
         if (!isset($chats[0])) {
-            die("No questions in the database");
+            die("No chats in the database");
         }
         header("Content-type: application/json");
         echo json_encode($chats, JSON_PRETTY_PRINT);
+        exit;
     }
 
     public function addChat($item_id) {
         // Add chatline passed in from POST to database, return updated chat.
         if(!empty($_POST["chat"]) && !empty($_SESSION["username"])) {
-            // If logged in and correct submission allow change.
-            $this->db->query("insert into chats where");
+            // If logged in and correct submission allow insert.
+            $sender_id = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+            $this->db->query("insert into chats (item_id, 
+                message, date_sent, sender_id) values ($1, $2, $3, $4);", 
+                $item_id, "What's up, test?", date("Y-m-d H:i:s"), 1
+            );
         }
         else {
-            $_SESSION["message"] = "Must be logged in to use forum features.";
-            $_SESSION["condition"] = "bad";   
+            // TODO: Redirect to login page
+            $_SESSION["message"] = "You need to be logged in.";
+            $_SESSION["condition"] = "neutral";
+            session_write_close();
+            header("Location: login.php");
+            exit;
         }
-        getChat($item_id);
     }
 
 }
+
+?>
