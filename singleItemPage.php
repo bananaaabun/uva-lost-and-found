@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <?= $message ?>
+    <?= $_SESSION["message"] ?>
     <?php include("components/navbar.php"); ?>
 
     <section class="sectionContainer">
