@@ -8,6 +8,8 @@ sources:
         Cool shadow effects on boxes
     3. https://stackoverflow.com/questions/10800355/remove-whitespaces-inside-a-string-in-javascript
         Remove spaces from string
+    4. https://stackoverflow.com/questions/11715646/scroll-automatically-to-the-bottom-of-the-page
+        Auto scroll to bottom
     
 -->
 <?php
