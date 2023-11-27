@@ -1,3 +1,10 @@
+<?php
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,11 +65,46 @@
                 <p><strong>Description:</strong>
                     <?= $item["item_description"] ?>
                 </p>
+                <p id="itemId">
+                    <?= $item["item_id"] ?>
+                </p>
                 <button type="button" style="opacity: 90%;" class="btn btn-danger">Not Claimed</button>
                 <!-- Change to green if claimed and pull status from db-->
             </div>
             <!-- Chat container -->
-            <?php include("components/chat.php"); ?>
+            <div class="chatContainer mt-2">
+                <div class="chatHeader text-white p-2 rounded-top">
+                    Chat about this item
+                </div>
+
+                <!-- chat content -->
+                <div id="chatBody" class="chatBody p-3" style="height: 200px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
+                </div>
+
+                <!-- send new chat -->
+                <form class="chatFooter p-2 bg-light rounded-bottom">
+                    <input type="text" class="form-control" placeholder="Type your message...">
+                    <button class="button-primary" style="margin-left: 5px;">Send</button>
+                </form>
+
+                <script>
+
+                    let idContainer = document.getElementById("itemId");
+                    let item_id = idContainer.innerHTML;
+
+                    $("#chatBody").load("components/chat.php?item_id=" + item_id);
+
+    //                 $("#chatBody").load("components/chat.php?item_id=" + item_id, function(response, status, xhr) {
+    // if (status == "error") {
+    //     console.log("Error loading content:", xhr.status, xhr.statusText);
+    // } else {
+    //     console.log("Content loaded successfully:", response);
+    // }
+// });
+
+                </script>
+
+            </div>
         </div>
     </section>
     <?php include("components/footer.php"); ?>

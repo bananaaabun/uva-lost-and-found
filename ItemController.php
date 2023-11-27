@@ -42,6 +42,14 @@ class ItemController
                 $item_id = $matches[1];
                 $this->showItemById($item_id);
                 break;
+            case preg_match('/getChat-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->showItemById($item_id);
+                break;
+            case preg_match('/addChat-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->addChat($item_id);
+                break;
             default:
                 $this->displayAllItems();
                 break;
@@ -67,6 +75,23 @@ class ItemController
             echo "No item found with id $item_id";
         }
         exit;
+    }
+
+    public function getChat($item_id) {
+        // Return JSON record of chats
+        $chats = $db->query("select * from chats where item_id = $1;", $item_id);
+        if (!isset($chats[0])) {
+            die("No questions in the database");
+        }
+        header("Content-type: application/json");
+        echo json_encode($chats, JSON_PRETTY_PRINT);
+    }
+
+    public function addChat($item_id) {
+        // Add chatline passed in from POST to database, return updated chat.
+        $chats = $db->query("select * from chats where item_id = $1;", $item_id);
+
+        return getChat($item_id);
     }
 
 }
