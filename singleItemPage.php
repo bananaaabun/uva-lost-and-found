@@ -65,7 +65,7 @@ ini_set("display_errors", 1);
                 <p><strong>Description:</strong>
                     <?= $item["item_description"] ?>
                 </p>
-                <p id="itemId">
+                <p id="itemId" style="display:none;">
                     <?= $item["item_id"] ?>
                 </p>
                 <button type="button" style="opacity: 90%;" class="btn btn-danger">Not Claimed</button>
@@ -83,19 +83,17 @@ ini_set("display_errors", 1);
                 </div>
 
                 <!-- send new chat -->
-                <div id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
+                <form id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
                     <input id="chatBox" type="text" class="form-control" placeholder="Type your message...">
                     <button id="chatButton" class="button-primary" style="margin-left: 5px;">Send</button>
-                </div>
+                </form>
 
                 <script>
 
                     let idContainer = document.getElementById("itemId");
-                    let chatButton = document.getElementById("chatButton");
+                    let chatForm = document.getElementById("chatForm");
                     let itemId = idContainer.innerHTML.replace(/\s/g, "");
                     var chats;
-
-                    // $("#chatBody").load("components/chat.php?getChat=" + itemId);
 
                     function loadChat() {
                         console.log("loading chats");
@@ -125,16 +123,17 @@ ini_set("display_errors", 1);
                         console.log("Displaying chats.");
                         let chatBody = document.getElementById("chatBody");
                         chatBody.innerHTML = "";
-                        // if (!c)
+                        // Something weird here
+                        // if (c == null)
                         //     console.log('here');
                         //     chatBody.innerHTML = "Start chatting now!";
                         //     return;
                         c.forEach(chat => {
-                            console.log(chat);
                             let p = document.createElement("p");
-                            p.innerHTML = `<strong>${chat["sender_id"]}</strong> ${chat["message"]}`;
+                            p.innerHTML = `<strong>${chat["sender"]}</strong>: ${chat["message"]} - <small>${chat["date_sent"]}</small>`;
                             chatBody.appendChild(p);
                         })
+                        chatBody.scrollTo(0, chatBody.scrollHeight);
                     }
 
                     function sendChat(itemId) {
@@ -153,10 +152,12 @@ ini_set("display_errors", 1);
                         )
                     }
 
-                    chatButton.addEventListener("click", (event) => {
-                        console.log("clicked");
+                    chatForm.addEventListener("submit", (event) => {
+                        event.preventDefault();
+                        let chatTextbox = document.getElementById("chatBox");
                         sendChat(itemId);
-                    });
+                        chatTextbox.value = "";
+                    })
 
                     loadChat();
 

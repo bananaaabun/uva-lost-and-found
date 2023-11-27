@@ -91,19 +91,18 @@ class ItemController
         // Add chatline passed in from POST to database, return updated chat.
         if(!empty($_POST["chat"]) && !empty($_SESSION["username"])) {
             // If logged in and correct submission allow insert.
-            $sender_id = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
             $this->db->query("insert into chats (item_id, 
-                message, date_sent, sender_id) values ($1, $2, $3, $4);", 
-                $item_id, "What's up, test?", date("Y-m-d H:i:s"), 1
+                message, date_sent, sender) values ($1, $2, $3, $4);", 
+                $item_id, $_POST["chat"], date("Y-m-d H:i:s"), $_SESSION["username"]
             );
         }
         else {
-            // TODO: Redirect to login page
-            $_SESSION["message"] = "You need to be logged in.";
-            $_SESSION["condition"] = "neutral";
-            session_write_close();
-            header("Location: login.php");
-            exit;
+            // TODO: Redirect to login page... this might not work cause AJAX
+            // $_SESSION["message"] = "You need to be logged in.";
+            // $_SESSION["condition"] = "neutral";
+            // session_write_close();
+            // header("Location: login.php");
+            // exit;
         }
     }
 
