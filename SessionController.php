@@ -227,15 +227,6 @@ class SessionController {
             if ($user_id_email === $user_id_item) {
                 // $res = $this->db->query("delete from chats where item_id = $1;", $item_id);
                 $res = $this->db->query("delete from items where item_id = $1;", $item_id);
-                print_r($res);
-                if (!$res) {
-                    $_SESSION["message"] = "Item failed to delete with id {$item_id}. - Please try again later. - ". pg_last_error();
-                    $_SESSION["condition"] = "bad";
-                    $this->getUserItems();
-                    session_write_close();
-                    header("Location: login.php");
-                    exit;
-                }
                 $_SESSION["message"] = "Item succesfully deleted.";
                 $_SESSION["condition"] = "neutral";
                 $this->getUserItems();
