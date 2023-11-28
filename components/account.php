@@ -35,7 +35,7 @@
     } else { ?>
 
         <p> You have no items currently. </p>
-        <a class="button-one" href="makeRequest.html">Add an item you have found or lost.</a>
+        <a class="button-one" href="makeRequest.php">Add an item you have found or lost.</a>
 
     <?php } ?>
 
