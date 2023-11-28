@@ -38,6 +38,10 @@ class SessionController {
             case "login":
                 $this->login();
                 break;
+            case preg_match('/deleteItem-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->deleteItem($item_id);
+                break;
             case "newusername":
                 $this->changeUsername();
                 break;
@@ -208,6 +212,50 @@ class SessionController {
     public function goHome() {
         header("Location: index.php");
         exit;
+    }
+
+    /**
+     * Delete the item
+     */
+    public function deleteItem($item_id) {
+        if ($_SESSION["email"]) {
+            $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+            $user_id_email = $id_res[0]["user_id"];
+            $id_res2 = $this->db->query("select user_id from items where item_id = $1;", $item_id);
+            $user_id_item = $id_res[0]["user_id"];
+            // Only let original poster delete
+            if ($user_id_email === $user_id_item) {
+                $res = $this->db->query("delete from items where item_id = $1;", $item_id);
+                if (!$res) {
+                    $_SESSION["message"] = "Item failed to delete with id {$item_id}. Please try again later.";
+                    $_SESSION["condition"] = "bad";
+                    $this->getUserItems();
+                    session_write_close();
+                    header("Location: login.php");
+                    exit;
+                }
+                $_SESSION["message"] = "Item succesfully deleted.";
+                $_SESSION["condition"] = "neutral";
+                $this->getUserItems();
+                session_write_close();
+                header("Location: login.php");
+                exit;
+            }
+            else {
+                $_SESSION["message"] = "This is not your item to delete.";
+                $_SESSION["condition"] = "bad";
+                session_write_close();
+                header("Location: index.php");
+                exit;
+            }
+        }
+        else {
+            $_SESSION["message"] = "Must be logged in to delete item.";
+            $_SESSION["condition"] = "bad";
+            session_write_close();
+            header("Location: login.php");
+            exit;
+        }
     }
 
 }

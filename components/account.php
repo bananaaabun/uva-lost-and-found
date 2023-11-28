@@ -3,12 +3,6 @@
     <img src="assets/logo.png" style="width: 200px;" alt="logo">
 </div>
 
-<script>
-    function deleteItem(id) {
-        console.log(id);
-    }
-</script>
-
 <?php include("modAccountForm.php"); 
 
 // print_r($_SESSION["user_items"]);
@@ -31,12 +25,12 @@
                 <div class=\"fc center outline\">
                     <h4 class=\"item-name\" style=\"font-weight:bold;\">{$cur_item["item_name"]}</h4>
                     <p>Status: {$claim_status} </p>
-                    <button class=\"btn btn-danger\">Delete Item</button>
+                    <a href=\"?command=deleteItem-{$item_id}\" class=\"btn btn-danger\">Delete Item</a>
                 </div>
                 ";
         }
 
-        echo `</div>`;
+        echo "</div>";
 
     } else { ?>
 
