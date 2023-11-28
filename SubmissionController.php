@@ -102,6 +102,7 @@ class SubmissionController {
         // image text,
         // $itemImage = $_POST['itemImage'];
         $item_image_filename = basename($_FILES['itemImage']['name']);
+        $claimed = "unclaimed";
 
         // Check if date is in the future
         $currentDate = date("Y-m-d");
@@ -171,14 +172,15 @@ class SubmissionController {
         }
 
         $res = $this->db->query(
-            "INSERT INTO items (user_id, item_name, date_added, location_found, item_description, image_file_name, lf_status) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+            "INSERT INTO items (user_id, item_name, date_added, location_found, item_description, image_file_name, lf_status, claim_status) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
             $id,
             $itemName,
             $itemDate,
             $itemLocation,
             $itemDescription,
             $item_image_filename,
-            $itemStatus
+            $itemStatus,
+            $claimed
         );
         if (!$res) {
             // die("Query failed: " . pg_last_error() . "\n");

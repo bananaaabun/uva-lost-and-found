@@ -49,6 +49,14 @@ class ItemController
                 $item_id = $matches[1];
                 $this->addChat($item_id);
                 break;
+            case preg_match('/getStatus-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->getStatus($item_id);
+                break;
+            case preg_match('/toggleStatus-(\d+)/', $command, $matches) ? $command : !$command:
+                $item_id = $matches[1];
+                $this->toggleStatus($item_id);
+                break;
             default:
                 $this->displayAllItems();
                 break;
@@ -96,13 +104,29 @@ class ItemController
                 $item_id, $_POST["chat"], date("Y-m-d H:i:s"), $_SESSION["username"]
             );
         }
-        else {
-            // TODO: Redirect to login page... this might not work cause AJAX
-            // $_SESSION["message"] = "You need to be logged in.";
-            // $_SESSION["condition"] = "neutral";
-            // session_write_close();
-            // header("Location: login.php");
-            // exit;
+    }
+
+    public function getStatus($item_id) {
+        $cur_status = $this->db->query("select claim_status from items where item_id = $1;", $item_id);
+        header("Content-type: application/json");
+        echo json_encode($cur_status, JSON_PRETTY_PRINT);
+        exit;
+    }
+
+    public function toggleStatus($item_id) {
+        if ($_SESSION["email"]) {
+            $id_res = $this->db->query("select user_id from users where email = $1;", $_SESSION["email"]);
+            $user_id = $id_res[0]["user_id"];
+            $res = $this->db->query("select claim_status from items where item_id = $1;", $item_id);
+            $claim_status = $res[0]["claim_status"];
+            if ($claim_status === "claimed") {
+                $new = "unclaimed";
+            }
+            else {
+                $new = "claimed";
+            }
+            // Only let original poster change status
+            $this->db->query("update items set claim_status = $1 where item_id = $2 and user_id = $3;", $new , $item_id, $user_id);
         }
     }
 

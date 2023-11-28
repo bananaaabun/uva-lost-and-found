@@ -77,7 +77,7 @@ $sub_controller->run();
                     <input type="date" id="itemDate" name="itemDate">
                 </div>
                 <div class="form-group">
-                    <label for="itemLocation">Location Found:</label>
+                    <label for="itemLocation">Location Lost or Found:</label>
                     <input type="text" id="itemLocation" name="itemLocation" placeholder="e.g., Newcomb Hall">
                 </div>
                 <div class="form-group">
