@@ -185,9 +185,9 @@ nav a {
 
 
 .itemContainer {
-    margin: 20px;
-    padding-right: 30px;
-    flex-grow: 2;
+    /* margin: 20px; */
+    /* padding-right: 30px; */
+    /* flex-grow: 2; */
 }
 
 .sectionContainer {
@@ -206,7 +206,7 @@ nav a {
 .imgContainer {
     width: 550px;
     display: flex;
-    height: 600px;
+    /* height: 600px; */
     margin: 30px;
     overflow: hidden;
     padding-left: 15px;
@@ -218,20 +218,13 @@ nav a {
     object-fit: cover;
 }
 
-hr{
+hr {
 	background-color:black;
 	size: 4cm;
 }
 
-.chatContainerWrapper{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
 .chatContainer {
     width: 100%;
-    max-width: 550px;
 	padding-left: 20px;
 }
 
@@ -306,4 +299,16 @@ hr{
 
 .lost-item-container:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#left {
+    flex: 1;
+    min-width: 600px;
+    align-items: stretch;
+}
+
+#right {
+    flex: 1;
+    min-width: 500px;
+    align-items: stretch;
 }
