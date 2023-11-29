@@ -22,25 +22,15 @@ ini_set("display_errors", 1);
 </head>
 <body>
 <?php include("components/navbar.php"); ?>
-<section class="fr" style="align-items: flex-start;">
-    <div id="left" class="fc outline" style="margin-top: 0px">
-        <div class="itemContainer">
-            <h2>
-                <?= $item["item_name"] ?>
-            </h2>
+<section class="fr center">
+    <section id="left" class="fc outline" style="margin-top: 0px; max-width: 700px;">
+        <div>
+            <h2><?= $item["item_name"] ?></h2>
             <hr>
-            <p><strong>Found on:</strong>
-                <?= $item["date_added"] ?>
-            </p>
-            <p><strong>Location:</strong>
-                <?= $item["location_found"] ?>
-            </p>
-            <p><strong>Description:</strong>
-                <?= $item["item_description"] ?>
-            </p>
-            <p id="itemId" style="display:none;">
-                <?= $item["item_id"] ?>
-            </p>
+            <p><strong>Found on: </strong><?= $item["date_added"] ?></p>
+            <p><strong>Location: </strong><?= $item["location_found"] ?></p>
+            <p><strong>Description: </strong><?= $item["item_description"] ?></p>
+            <p id="itemId" style="display:none;"><?= $item["item_id"] ?></p>
             <button type="button" id="statusButton" style="opacity: 90%;" class="btn btn-danger" >Not Claimed</button>
         </div>
         <div class="imgContainer">
@@ -55,24 +45,18 @@ ini_set("display_errors", 1);
                 </div>
             </div>
         </div>
-    </div>
-    <div id="right" class="fc">
-        <div class="chatContainer" >
+    </section>
+    <section id="right" class="fc" style="max-width: 700px;">
+        <div class="chatContainer">
             <div class="chatHeader text-white p-2 rounded-top">
                 Item Forum
             </div>
-
-            <!-- chat content -->
-            <div id="chatBody" class="chatBody p-3" style="height: 100%; min-height: 500px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
-            
+            <div id="chatBody" class="chatBody p-3" style="height: 500px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
             </div>
-
-            <!-- send new chat -->
             <form id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
                 <input id="chatBox" type="text" class="form-control" placeholder="Type your message...">
                 <button id="chatButton" class="button-primary" style="margin-left: 5px;">Send</button>
             </form>
-
             <script>
 
                 // Handle the chat
@@ -185,13 +169,16 @@ ini_set("display_errors", 1);
                     updateStatus();
                 })
 
-            </script>
-            <div class="outline" style="margin: 25px 0px 0px 0px;">
-                <p><strong>Guide: </strong>If this is your item, please connect with the poster in the forum. If you are the poster and this item has been claimed, please click the button below to toggle.</p>
-                <strong>The item can be deleted from original poster's account page.</strong>
-            </div>   
+            </script> 
         </div>
-    </div>
+        <div class="outline" style="margin: 25px 0px 0px 0px;">
+            <p>
+                <strong>Guide: </strong>
+                If this is your item, please connect with the poster in the forum. If you are the poster and this item has been claimed, please click the button below to toggle.
+            </p>
+            <strong>The item can be deleted from original poster's account page.</strong>
+        </div> 
+    </section>
 </section>
 <?php include("components/footer.php"); ?>
 </body>
