@@ -139,7 +139,7 @@ class SubmissionController {
             }
 
             // Check file size
-            if ($_FILES['itemImage']['size'] > 500000) { // 500KB limit
+            if ($_FILES['itemImage']['size'] > 5000000) { // 5MB limit
                 $_SESSION["message"] = "Sorry, your file is too large.";
                 $_SESSION["condition"] = "bad";
                 $uploadOk = 0;

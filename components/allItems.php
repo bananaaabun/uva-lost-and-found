@@ -73,10 +73,11 @@
                     echo "  
                             <a href=\"?command=itemPage-{$item_id}\" style=\"color: black; text-decoration: none;\">
                                 <div class=\"individual-item lost-item fc center lost-item-container\">
-                                    <h4 class=\"item-name\" style=\"font-weight:bold;\">{$cur_item["item_name"]}<h4>
-                                    <p>Status: {$lf_status} </p>
-                                    <img src=\"{$img_src}\" style=\"width:100px;\" >
+                                    <img src=\"{$img_src}\" style=\"width:100px object-fit:fill\" >
+                                    <h5 class=\"item-name\" style=\"font-weight:bold;\">{$cur_item["item_name"]}</h5>
+                                    
                                 </div>
+                               
                             </a>
                         ";
                 }

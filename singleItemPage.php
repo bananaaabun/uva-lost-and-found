@@ -62,9 +62,13 @@ ini_set("display_errors", 1);
                 <p><strong>Location:</strong>
                     <?= $item["location_found"] ?>
                 </p>
+                <p><strong>This item was: </strong>
+                <?= ($item["lf_status"] == "t") ? "Lost" : "Found"; ?>
+                </p>
                 <p><strong>Description:</strong>
                     <?= $item["item_description"] ?>
                 </p>
+                
                 <p id="itemId" style="display:none;">
                     <?= $item["item_id"] ?>
                 </p>
