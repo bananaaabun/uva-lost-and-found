@@ -53,10 +53,17 @@ ini_set("display_errors", 1);
             </div>
             <div id="chatBody" class="chatBody p-3" style="height: 500px; overflow-y: scroll; border: 1px solid #dcdcdc; background-color: #f5f5f5;">
             </div>
-            <form id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
-                <input id="chatBox" type="text" class="form-control" placeholder="Type your message...">
-                <button id="chatButton" class="button-primary" style="margin-left: 5px;">Send</button>
-            </form>
+            <?php if (!empty($_SESSION["email"])) { ?>
+                <form id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
+                    <input id="chatBox" type="text" class="form-control" placeholder="Type your message...">
+                    <button id="chatButton" class="button-primary" style="margin-left: 5px;">Send</button>
+                </form>
+            <?php } else { ?>
+                <form id="chatForm" class="chatFooter p-2 bg-light rounded-bottom">
+                    <input id="chatBox" type="text" class="form-control" placeholder="Please log in to chat." disabled>
+                    <button id="chatButton" class="button-primary" style="margin-left: 5px;" disabled>Send</button>
+                </form>
+            <?php } ?>
             <script>
 
                 // Handle the chat
