@@ -22,7 +22,7 @@ ini_set("display_errors", 1);
 </head>
 <body>
 <?php include("components/navbar.php"); ?>
-<section class="fr center">
+<section class="fr center" style="align-items: flex-start;">
     <section id="left" class="fc outline" style="margin-top: 0px; max-width: 700px;">
         <div>
             <h2><?= $item["item_name"] ?></h2>
